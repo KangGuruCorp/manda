@@ -2,19 +2,24 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-        if (!apiKey) {
-            return NextResponse.json({ error: "API Key tidak ditemukan di server." }, { status: 500 });
-        }
+        const { questionText, studentAnswer, rubric, indicator, cognitiveLevel, scoringCriteria, customApiKey, customModel } = await req.json();
 
-        const { questionText, studentAnswer, rubric, indicator, cognitiveLevel, scoringCriteria } = await req.json();
+        // Strictly use custom API Key from settings as requested
+        const apiKey = customApiKey;
+        
+        if (!apiKey || apiKey.trim() === "" || apiKey === "your_gemini_api_key") {
+            return NextResponse.json({ 
+                error: "API Key belum diatur. Silakan masukkan API Key di menu Pengaturan Dashboard Admin." 
+            }, { status: 400 });
+        }
 
         if (!studentAnswer || studentAnswer.trim().length < 2) {
             return NextResponse.json({ score: 0, feedback: "Jawaban kosong atau terlalu singkat." });
         }
 
-        // Using gemini-2.5-flash (latest, confirmed available)
-        const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        // Use custom model from settings or default to gemini-2.5-flash
+        const model = customModel || "gemini-2.5-flash";
+        const URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
         const prompt = `
             Anda adalah pakar evaluasi pendidikan matematika. Tugas Anda adalah menilai jawaban siswa pada soal esai berpikir kritis (0-4).
