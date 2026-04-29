@@ -297,7 +297,21 @@ export default function AdminDashboard() {
 
     const calculateScore = (angkets?: Record<number, number>) => {
         if (!angkets) return 0;
-        return Object.values(angkets).reduce((acc, curr) => acc + curr, 0);
+        // Negative indices based on 4 pos / 4 neg pattern
+        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
+        
+        return Object.entries(angkets).reduce((acc, [idx, val]) => {
+            const index = Number(idx);
+            
+            // Skip trap question (index 40) from total score calculation
+            if (index === 40) return acc;
+            
+            if (negativeIndices.includes(index)) {
+                // Reversed: 5 becomes 1, 4 becomes 2, etc.
+                return acc + (6 - val);
+            }
+            return acc + val;
+        }, 0);
     };
 
     const isStudentFinished = (s: Student) => {
@@ -1385,10 +1399,10 @@ export default function AdminDashboard() {
                                                         <span className="font-semibold text-slate-600">{calculateScore(s.angkets_1) || "-"}</span>
                                                         {s.angkets_1 && calculateScore(s.angkets_1) > 0 && (
                                                             <button
-                                                                onClick={(e) => { e.stopPropagation(); const val = getScaleValidity(calculateScore(s.angkets_1), 215); if (val) setPopover({ text: val.desc, x: e.clientX, y: e.clientY, idx: `v1-${s.id}` }); }}
-                                                                className={`text-[9px] px-2 py-0.5 rounded-full border font-bold hover:scale-105 transition-transform ${getScaleValidity(calculateScore(s.angkets_1), 215)?.color}`}
+                                                                onClick={(e) => { e.stopPropagation(); const val = getScaleValidity(calculateScore(s.angkets_1), 200); if (val) setPopover({ text: val.desc, x: e.clientX, y: e.clientY, idx: `v1-${s.id}` }); }}
+                                                                className={`text-[9px] px-2 py-0.5 rounded-full border font-bold hover:scale-105 transition-transform ${getScaleValidity(calculateScore(s.angkets_1), 200)?.color}`}
                                                             >
-                                                                {getScaleValidity(calculateScore(s.angkets_1), 215)?.label}
+                                                                {getScaleValidity(calculateScore(s.angkets_1), 200)?.label}
                                                             </button>
                                                         )}
                                                     </div>
@@ -1398,10 +1412,10 @@ export default function AdminDashboard() {
                                                         <span className="font-semibold text-slate-600">{calculateScore(s.angkets_2) || "-"}</span>
                                                         {s.angkets_2 && calculateScore(s.angkets_2) > 0 && (
                                                             <button
-                                                                onClick={(e) => { e.stopPropagation(); const val = getScaleValidity(calculateScore(s.angkets_2), 205); if (val) setPopover({ text: val.desc, x: e.clientX, y: e.clientY, idx: `v2-${s.id}` }); }}
-                                                                className={`text-[9px] px-2 py-0.5 rounded-full border font-bold hover:scale-105 transition-transform ${getScaleValidity(calculateScore(s.angkets_2), 205)?.color}`}
+                                                                onClick={(e) => { e.stopPropagation(); const val = getScaleValidity(calculateScore(s.angkets_2), 200); if (val) setPopover({ text: val.desc, x: e.clientX, y: e.clientY, idx: `v2-${s.id}` }); }}
+                                                                className={`text-[9px] px-2 py-0.5 rounded-full border font-bold hover:scale-105 transition-transform ${getScaleValidity(calculateScore(s.angkets_2), 200)?.color}`}
                                                             >
-                                                                {getScaleValidity(calculateScore(s.angkets_2), 205)?.label}
+                                                                {getScaleValidity(calculateScore(s.angkets_2), 200)?.label}
                                                             </button>
                                                         )}
                                                     </div>
@@ -1576,9 +1590,8 @@ export default function AdminDashboard() {
                                             Data Triangulasi (Skala)
                                         </h3>
 
-                                        {renderAngketList("Kebiasaan Berpikir", calculateScore(gradingModal.angkets_1), 215, gradingModal.angkets_1, LINGKUNGAN_BELAJAR_Q, false)}
-
-                                        {renderAngketList("Efikasi Diri", calculateScore(gradingModal.angkets_2), 205, gradingModal.angkets_2, EFIKASI_DIRI_Q, true)}
+                                        {renderAngketList("Kebiasaan Berpikir", calculateScore(gradingModal.angkets_1), 200, gradingModal.angkets_1, LINGKUNGAN_BELAJAR_Q, false)}
+                                        {renderAngketList("Efikasi Diri", calculateScore(gradingModal.angkets_2), 200, gradingModal.angkets_2, EFIKASI_DIRI_Q, true)}
 
                                     </div>
                                 </div>
