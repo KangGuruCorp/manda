@@ -37,6 +37,9 @@ export default function AdminDashboard() {
     const [customApiKey, setCustomApiKey] = useState("");
     const [customModel, setCustomModel] = useState("gemini-2.5-flash");
 
+    // Unified Negative Indices (4 per dimension)
+    const NEGATIVE_INDICES = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
+
     useEffect(() => {
         const savedKey = localStorage.getItem("gemini_api_key");
         const savedModel = localStorage.getItem("gemini_model_name");
@@ -297,8 +300,6 @@ export default function AdminDashboard() {
 
     const calculateScore = (angkets?: Record<number, number>) => {
         if (!angkets) return 0;
-        // Negative indices based on 4 pos / 4 neg pattern
-        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
         
         return Object.entries(angkets).reduce((acc, [idx, val]) => {
             const index = Number(idx);
@@ -306,7 +307,7 @@ export default function AdminDashboard() {
             // Skip trap question (index 40) from total score calculation
             if (index === 40) return acc;
             
-            if (negativeIndices.includes(index)) {
+            if (NEGATIVE_INDICES.includes(index)) {
                 // Reversed: 5 becomes 1, 4 becomes 2, etc.
                 return acc + (6 - val);
             }
@@ -583,14 +584,13 @@ export default function AdminDashboard() {
         const wsRecap = XLSX.utils.aoa_to_sheet([recapHeaders, ...recapRows]);
 
         // 2. Angket Kebiasaan Berpikir (Item breakdown)
-        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
         const envHeaders = ["Nama Lengkap", "Nama Sekolah", ...Array.from({ length: 41 }).map((_, i) => `Butir ${i + 1}`)];
         const envRows = students.map(s => [
             s.name,
             s.school || "-",
             ...Array.from({ length: 41 }).map((_, i) => {
                 let val = s.angkets_1?.[i];
-                if (val !== undefined && negativeIndices.includes(i)) {
+                if (val !== undefined && NEGATIVE_INDICES.includes(i)) {
                     val = 6 - val;
                 }
                 return val ?? "";
@@ -605,7 +605,7 @@ export default function AdminDashboard() {
             s.school || "-",
             ...Array.from({ length: 41 }).map((_, i) => {
                 let val = s.angkets_2?.[i];
-                if (val !== undefined && negativeIndices.includes(i)) {
+                if (val !== undefined && NEGATIVE_INDICES.includes(i)) {
                     val = 6 - val;
                 }
                 return val ?? "";
@@ -656,10 +656,9 @@ export default function AdminDashboard() {
                 <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                     {flatQuestions.map((q, i) => {
                         const rawAns = angkets?.[i];
-                        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
                         let ans = rawAns;
                         
-                        if (rawAns !== undefined && negativeIndices.includes(i)) {
+                        if (rawAns !== undefined && NEGATIVE_INDICES.includes(i)) {
                             ans = 6 - rawAns;
                         }
 
@@ -1276,11 +1275,10 @@ export default function AdminDashboard() {
                                                     <td className="p-4 text-center font-bold text-slate-600 border-r border-slate-100 bg-white">{calculateScore(angkets) || "-"}</td>
                                                     {Array.from({ length: len }).map((_, i) => {
                                                         const rawVal = angkets?.[i];
-                                                        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
                                                         let displayVal = rawVal;
                                                         
-                                                        // Reverse display value for negative items (except trap index 40)
-                                                        if (rawVal !== undefined && negativeIndices.includes(i)) {
+                                                        // Reverse display value for negative items
+                                                        if (rawVal !== undefined && NEGATIVE_INDICES.includes(i)) {
                                                             displayVal = 6 - rawVal;
                                                         }
 
