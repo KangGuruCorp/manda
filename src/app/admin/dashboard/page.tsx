@@ -754,20 +754,8 @@ export default function AdminDashboard() {
         }
         if (confirm(`Apakah Anda yakin ingin menghapus respon dari "${name}"? Tindakan ini tidak dapat dibatalkan.`)) {
             try {
-                const res = await fetch("/api/admin/delete-student", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        studentId: id,
-                        adminPassword: "11223344" // Security token
-                    })
-                });
-
-                const data = await res.json();
-
-                if (!res.ok) {
-                    throw new Error(data.error || "Gagal menghapus data dari server.");
-                }
+                const studentRef = doc(db, "students", id);
+                await deleteDoc(studentRef);
 
                 // Clean up local storage if it was ever used as a cache
                 const localData = localStorage.getItem("localStudentsData");
@@ -780,8 +768,8 @@ export default function AdminDashboard() {
 
                 alert(`Data responden "${name}" telah berhasil dihapus.`);
             } catch (err: any) {
-                console.error("Delete failed:", err);
-                alert(`Gagal menghapus data: ${err.message}`);
+                console.error("Firebase delete failed:", err);
+                alert(`Gagal menghapus data: ${err.message || "Kesalahan pada server Firestore"}`);
             }
         }
     };
