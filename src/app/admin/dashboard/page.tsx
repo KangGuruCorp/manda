@@ -503,8 +503,9 @@ export default function AdminDashboard() {
     const exportInstrumentBlueprint = () => {
         const blueprintHeader = ["No", "Butir Pernyataan", "Dimensi", "Favorabilitas (+/-)"];
 
-        // 1. Lingkungan Belajar
-        const envNegative = [2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31, 34, 35, 40, 41, 42];
+        // 1. Lingkungan Belajar (Kebiasaan Berpikir)
+        // Pattern: 4 positive, 4 negative per dimension
+        const envNegative = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39, 40];
         const envBlueprintData: any[] = [];
         let envGlobalIdx = 0;
         LINGKUNGAN_BELAJAR_Q.forEach(dim => {
@@ -520,6 +521,7 @@ export default function AdminDashboard() {
         });
 
         // 2. Efikasi Diri
+        // Pattern: 4 positive, 4 negative per dimension
         const efiNegative = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39, 40];
         const efiBlueprintData: any[] = [];
         let efiGlobalIdx = 0;
