@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { collection, getDocs, doc, updateDoc, onSnapshot, deleteDoc } from "firebase/firestore";
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     const [gradingModal, setGradingModal] = useState<Student | null>(null);
     const [batchLoadingStudentId, setBatchLoadingStudentId] = useState<string | null>(null);
     const [scoreInput, setScoreInput] = useState<number | "">("");
-    const [activeView, setActiveView] = useState<"Rekap" | "Lingkungan" | "Efikasi" | "Evaluasi" | "Settings">("Rekap");
+    const [activeView, setActiveView] = useState<"Rekap" | "Kebiasaan" | "Efikasi" | "Evaluasi" | "Settings">("Rekap");
     const [popover, setPopover] = useState<{ text: string, x: number, y: number, idx: number | string } | null>(null);
     const [sortConfig, setSortConfig] = useState<{ key: 'name' | 'lastUpdated'; direction: 'asc' | 'desc' } | null>(null);
 
@@ -377,7 +377,7 @@ export default function AdminDashboard() {
             return variance;
         };
 
-        const var1 = checkVariance(s.angkets_1, 43);
+        const var1 = checkVariance(s.angkets_1, 41);
         const var2 = checkVariance(s.angkets_2, 41);
 
         if (var1 >= 0) {
@@ -401,11 +401,11 @@ export default function AdminDashboard() {
         }
 
         // === 3. JEBAKAN (-> per instrumen) ===
-        // Lingkungan Q43 (idx 42): "pilih 'Tidak Setuju' (TS)" -> jawaban benar = 2
-        if (s.angkets_1 && s.angkets_1[42] !== undefined) {
-            if (s.angkets_1[42] !== 2) {
+        // Lingkungan Q41 (idx 40): "pilih 'Tidak Setuju' (TS)" -> jawaban benar = 2
+        if (s.angkets_1 && s.angkets_1[40] !== undefined) {
+            if (s.angkets_1[40] !== 2) {
                 statsEnv.trap = "red";
-                issuesEnv.push(`Gagal Soal Jebakan (Lingkungan Q43): Menjawab ${s.angkets_1[42]}, seharusnya 2 (TS).`);
+                issuesEnv.push(`Gagal Soal Jebakan (Lingkungan Q41): Menjawab ${s.angkets_1[40]}, seharusnya 2 (TS).`);
             }
         }
         // Efikasi Q41 (idx 40): "pilihlah 'Sangat Setuju' (SS)" -> jawaban benar = 5
@@ -420,12 +420,9 @@ export default function AdminDashboard() {
         // Pasangan positif-negatif dalam dimensi yang sama.
         // Kontradiksi = keduanya >= 4 (Setuju/Sangat Setuju padahal maknanya bertolak belakang)
 
-        // -- Lingkungan Belajar --
-        // Dim I: Q1 (idx 0, positif: udara sejuk) vs Q3 (idx 2, negatif: gerah)
-        // Dim II: Q9 (idx 8, positif: guru bimbing) vs Q11 (idx 10, negatif: guru abaikan)
-        // Dim II: Q13 (idx 12, positif: teman bantu) vs Q15 (idx 14, negatif: teman ejek)
-        // Dim IV: Q25 (idx 24, positif: semangat) vs Q27 (idx 26, negatif: cemas)
-        const envPairs = [[0, 2], [8, 10], [12, 14], [24, 26]];
+        // -- Kebiasaan Berpikir --
+        // Pasangan positif-negatif dalam dimensi yang sama.
+        const envPairs = [[0, 4], [8, 12], [16, 20], [24, 28], [32, 36]];
         let logicEnvCount = 0;
         const logicEnvDetails: string[] = [];
         if (s.angkets_1) {
@@ -447,11 +444,8 @@ export default function AdminDashboard() {
         }
 
         // -- Efikasi Diri --
-        // Dim I: Q1 (idx 0, positif: mampu soal mudah) vs Q6 (idx 5, negatif: langsung menyerah)
-        // Dim I: Q4 (idx 3, positif: percaya diri) vs Q8 (idx 7, negatif: ragu/cemas)
-        // Dim II: Q9 (idx 8, positif: keyakinan kuat) vs Q13 (idx 12, negatif: mudah putus asa)
-        // Dim III: Q17 (idx 16, positif: berlaku semua materi) vs Q23 (idx 22, negatif: belum mampu keseluruhan)
-        const efiPairs = [[0, 5], [3, 7], [8, 12], [16, 22]];
+        // Pasangan positif-negatif dalam dimensi yang sama.
+        const efiPairs = [[0, 4], [8, 12], [16, 20], [24, 28], [32, 36]];
         let logicEfiCount = 0;
         const logicEfiDetails: string[] = [];
         if (s.angkets_2) {
@@ -542,7 +536,7 @@ export default function AdminDashboard() {
         });
 
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([blueprintHeader, ...envBlueprintData]), "Skala Lingkungan");
+        XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([blueprintHeader, ...envBlueprintData]), "Skala Kebiasaan");
         XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([blueprintHeader, ...efiBlueprintData]), "Skala Efikasi Diri");
 
         XLSX.writeFile(wb, "Blueprint_Pernyataan_Instrumen.xlsx");
@@ -554,9 +548,9 @@ export default function AdminDashboard() {
             "Nama Lengkap",
             "Nama Sekolah",
             "Status",
-            "Skor Lingkungan",
+            "Skor Kebiasaan",
             "Skor Efikasi",
-            "Total Skor Esai (40)",
+            "Total Skor Berpikir Kritis",
             "Skor Akhir (100)",
             "Hasil Validasi Sistem"
         ];
@@ -572,12 +566,12 @@ export default function AdminDashboard() {
         ]);
         const wsRecap = XLSX.utils.aoa_to_sheet([recapHeaders, ...recapRows]);
 
-        // 2. Angket Lingkungan Belajar (Item breakdown)
-        const envHeaders = ["Nama Lengkap", "Nama Sekolah", ...Array.from({ length: 43 }).map((_, i) => `Butir ${i + 1}`)];
+        // 2. Angket Kebiasaan Berpikir (Item breakdown)
+        const envHeaders = ["Nama Lengkap", "Nama Sekolah", ...Array.from({ length: 41 }).map((_, i) => `Butir ${i + 1}`)];
         const envRows = students.map(s => [
             s.name,
             s.school || "-",
-            ...Array.from({ length: 43 }).map((_, i) => s.angkets_1?.[i] ?? "")
+            ...Array.from({ length: 41 }).map((_, i) => s.angkets_1?.[i] ?? "")
         ]);
         const wsEnv = XLSX.utils.aoa_to_sheet([envHeaders, ...envRows]);
 
@@ -613,7 +607,7 @@ export default function AdminDashboard() {
         // Build Workbook & Excecute Download
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, wsRecap, "Rekapitulasi Global");
-        XLSX.utils.book_append_sheet(wb, wsEnv, "Jawaban Lingkungan Belajar");
+        XLSX.utils.book_append_sheet(wb, wsEnv, "Jawaban Kebiasaan Berpikir");
         XLSX.utils.book_append_sheet(wb, wsEfi, "Jawaban Efikasi Diri");
         XLSX.utils.book_append_sheet(wb, wsEssay, "Jawaban Tes Esai");
 
@@ -682,7 +676,7 @@ export default function AdminDashboard() {
             </button>
         );
 
-        if (activeView === "Lingkungan") {
+        if (activeView === "Kebiasaan") {
             return (
                 <tr>
                     <th className="p-4 font-semibold text-left sticky left-0 bg-slate-50 z-20 shadow-[1px_0_0_0_#f1f5f9]">
@@ -740,9 +734,9 @@ export default function AdminDashboard() {
                 <th className="p-4 font-semibold text-center">
                     <SortButton label="Waktu" sortKey="lastUpdated" />
                 </th>
-                <th className="p-4 font-semibold text-center">Kualitas Lingk.</th>
+                <th className="p-4 font-semibold text-center">Kualitas Kebiasaan</th>
                 <th className="p-4 font-semibold text-center">Kualitas Efi.</th>
-                <th className="p-4 font-semibold text-center">Lingk.</th>
+                <th className="p-4 font-semibold text-center">Kebiasaan</th>
                 <th className="p-4 font-semibold text-center">Efi.</th>
                 <th className="p-4 font-semibold text-center">Esai</th>
                 <th className="p-4 font-semibold text-center">Triangulasi</th>
@@ -834,6 +828,7 @@ export default function AdminDashboard() {
                     rubric: q.rubric,
                     indicator: q.indicator,
                     cognitiveLevel: q.cognitiveLevel,
+                    scoringCriteria: q.scoringCriteria,
                     customApiKey,
                     customModel
                 })
@@ -896,6 +891,7 @@ export default function AdminDashboard() {
                                 rubric: q.rubric,
                                 indicator: q.indicator,
                                 cognitiveLevel: q.cognitiveLevel,
+                                scoringCriteria: q.scoringCriteria,
                                 customApiKey,
                                 customModel
                             })
@@ -972,7 +968,8 @@ export default function AdminDashboard() {
                             studentAnswer: answer,
                             rubric: q.rubric,
                             indicator: q.indicator,
-                            cognitiveLevel: q.cognitiveLevel
+                            cognitiveLevel: q.cognitiveLevel,
+                            scoringCriteria: q.scoringCriteria
                         })
                     });
                     const data = await res.json();
@@ -1124,10 +1121,10 @@ export default function AdminDashboard() {
                                 Rekap Global
                             </button>
                             <button
-                                onClick={() => setActiveView("Lingkungan")}
-                                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeView === "Lingkungan" ? "bg-white text-primary shadow-sm ring-1 ring-slate-100" : "text-slate-500 hover:bg-slate-100"}`}
+                                onClick={() => setActiveView("Kebiasaan")}
+                                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeView === "Kebiasaan" ? "bg-white text-primary shadow-sm ring-1 ring-slate-100" : "text-slate-500 hover:bg-slate-100"}`}
                             >
-                                Skala Lingkungan
+                                Skala Kebiasaan
                             </button>
                             <button
                                 onClick={() => setActiveView("Efikasi")}
@@ -1139,7 +1136,7 @@ export default function AdminDashboard() {
                                 onClick={() => setActiveView("Evaluasi")}
                                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeView === "Evaluasi" ? "bg-white text-primary shadow-sm ring-1 ring-slate-100" : "text-slate-500 hover:bg-slate-100"}`}
                             >
-                                Instrumen Tes
+                                Tes Berpikir Kritis
                             </button>
                         </div>
                     </div>
@@ -1222,9 +1219,9 @@ export default function AdminDashboard() {
                                         </tr>
                                     )}
                                     {sortedStudents.map((s) => {
-                                        if (activeView === "Lingkungan" || activeView === "Efikasi") {
-                                            const isEnv = activeView === "Lingkungan";
-                                            const len = isEnv ? 43 : 41;
+                                        if (activeView === "Kebiasaan" || activeView === "Efikasi") {
+                                            const isEnv = activeView === "Kebiasaan";
+                                            const len = isEnv ? 41 : 41;
                                             const angkets = isEnv ? s.angkets_1 : s.angkets_2;
                                             const qsList = isEnv ? LINGKUNGAN_BELAJAR_Q.flatMap(d => d.qs) : EFIKASI_DIRI_Q.flatMap(d => d.qs);
                                             return (
@@ -1304,7 +1301,7 @@ export default function AdminDashboard() {
                                             );
                                         }
 
-                                        const envComplete = s.angkets_1 && Object.keys(s.angkets_1).length >= 43;
+                                        const envComplete = s.angkets_1 && Object.keys(s.angkets_1).length >= 41;
                                         const efiComplete = s.angkets_2 && Object.keys(s.angkets_2).length >= 41;
                                         const validation = analyzeRespondent(s);
 
@@ -1567,7 +1564,7 @@ export default function AdminDashboard() {
                                             Data Triangulasi (Skala)
                                         </h3>
 
-                                        {renderAngketList("Lingkungan Belajar", calculateScore(gradingModal.angkets_1), 215, gradingModal.angkets_1, LINGKUNGAN_BELAJAR_Q, false)}
+                                        {renderAngketList("Kebiasaan Berpikir", calculateScore(gradingModal.angkets_1), 215, gradingModal.angkets_1, LINGKUNGAN_BELAJAR_Q, false)}
 
                                         {renderAngketList("Efikasi Diri", calculateScore(gradingModal.angkets_2), 205, gradingModal.angkets_2, EFIKASI_DIRI_Q, true)}
 

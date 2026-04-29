@@ -7,7 +7,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "API Key tidak ditemukan di server." }, { status: 500 });
         }
 
-        const { questionText, studentAnswer, rubric, indicator, cognitiveLevel } = await req.json();
+        const { questionText, studentAnswer, rubric, indicator, cognitiveLevel, scoringCriteria } = await req.json();
 
         if (!studentAnswer || studentAnswer.trim().length < 2) {
             return NextResponse.json({ score: 0, feedback: "Jawaban kosong atau terlalu singkat." });
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
         const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
         const prompt = `
-            Anda adalah pakar evaluasi pendidikan matematika. Tugas Anda adalah menilai jawaban siswa pada soal esai penalaran proporsional (0-4).
+            Anda adalah pakar evaluasi pendidikan matematika. Tugas Anda adalah menilai jawaban siswa pada soal esai berpikir kritis (0-4).
 
             DATA SOAL:
             Teks Soal: "${questionText}"
@@ -29,12 +29,12 @@ export async function POST(req: Request) {
             JAWABAN SISWA:
             "${studentAnswer}"
 
-            RUBRIK PENILAIAN (0-4):
-            4: Benar, lengkap, alasan valid.
-            3: Benar/Hampir benar, pemahaman cukup, alasan kurang lengkap.
-            2: Sebagian benar, ada kesalahan signifikan.
-            1: Pemahaman minimal, sebagian kecil benar.
-            0: Salah/Kosong.
+            RUBRIK PENILAIAN SPESIFIK (0-4):
+            4: ${scoringCriteria[4]}
+            3: ${scoringCriteria[3]}
+            2: ${scoringCriteria[2]}
+            1: ${scoringCriteria[1]}
+            0: ${scoringCriteria[0]}
 
             FORMAT OUTPUT (JSON):
             {

@@ -463,7 +463,7 @@ function InstrumentContent() {
 
                 <div id="essay-scroll-point" className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-100 mb-8">
                     <div className="text-center mb-10 border-b-2 border-primary/20 pb-6">
-                        <h1 className="text-2xl font-bold text-primary">Tes Penalaran Proporsional</h1>
+                        <h1 className="text-2xl font-bold text-primary">Tes Berpikir Kritis</h1>
                     </div>
 
                     <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
@@ -481,413 +481,26 @@ function InstrumentContent() {
                         </p>
                     </div>
 
-                    {currentQ.id === 5 && (
-                        <div className="bg-amber-50 border border-amber-100 p-4 rounded-xl mb-8 flex gap-3 items-start">
-                            <div className="text-xs text-amber-800 leading-relaxed">
-                                <p className="font-bold mb-1">💡 Petunjuk:</p>
-                                <ul className="list-disc ml-4 space-y-1 font-medium">
-                                    <li><strong>Proporsional</strong>: Hubungan yang melibatkan perkalian atau pembagian yang bersifat konstan.</li>
-                                    <li><strong>Tidak Proporsional</strong>: Hubungan yang hanya berdasarkan pada penjumlahan atau selisih yang bersifat tetap.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    )}
+
 
                     <div className="space-y-4">
                         <div className="flex items-end">
                             <label className="block text-sm font-bold text-slate-600">
-                                {currentQ.id === 7
-                                    ? "a. Pilih bentuk visualisasi dan tentukan jarak yang dapat ditempuh jika tersedia 5 liter, 15 liter dan 35 liter bahan bakar!"
-                                    : "Tuliskan langkah penyelesaian di bawah ini:"
-                                }
+                                Tuliskan langkah penyelesaian di bawah ini:
                             </label>
                         </div>
 
-                        {currentQ.id === 5 ? (
-                            <div className="space-y-6">
-                                <div className="overflow-x-auto rounded-2xl border border-slate-200">
-                                    <table className="w-full text-sm">
-                                        <thead className="bg-slate-50 border-b border-slate-200">
-                                            <tr>
-                                                <th className="p-4 text-left font-bold text-slate-600 min-w-[250px]">Situasi</th>
-                                                <th className="p-4 text-center font-bold text-slate-600">Jenis Hubungan</th>
-                                                <th className="p-4 text-left font-bold text-slate-600 min-w-[200px]">Alasan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-slate-100">
-                                            {[1, 2].map((sit) => {
-                                                const currentVal = essayAnswers[essayStep] || "";
-
-                                                // Extract choices and reason using more robust regex
-                                                const choiceMatch = currentVal.match(new RegExp(`S${sit}:\\s*(Proporsional|Tidak Proporsional)`));
-                                                const choice = choiceMatch ? choiceMatch[1] : "";
-                                                const reasonMatch = currentVal.match(new RegExp(`A${sit}:\\s*([^|]*)`));
-                                                const reason = reasonMatch ? reasonMatch[1] : "";
-
-                                                const isProp = choice === 'Proporsional';
-                                                const isNonProp = choice === 'Tidak Proporsional';
-
-                                                const sitTexts = [
-                                                    "Umur Risa saat ini adalah 14 tahun, sedangkan umur adiknya 10 tahun. Risa menghitung bahwa 5 tahun lagi, umurnya akan menjadi 19 tahun dan adiknya menjadi 15 tahun.",
-                                                    "Sebuah mesin pencetak (printer) mampu mencetak 30 lembar dokumen dalam waktu 2 menit. Jika mesin beroperasi tanpa henti selama 6 menit, maka dokumen yang tercetak adalah 90 lembar."
-                                                ];
-
-                                                const updateData = (newChoice: string, newReason: string) => {
-                                                    // Parse existing or defaults
-                                                    let s1C = sit === 1 ? newChoice : (currentVal.match(/S1:\s*(Proporsional|Tidak Proporsional)/)?.[1] || "");
-                                                    let s1R = sit === 1 ? newReason : (currentVal.match(/A1:\s*([^|]*)/)?.[1] || "");
-                                                    let s2C = sit === 2 ? newChoice : (currentVal.match(/S2:\s*(Proporsional|Tidak Proporsional)/)?.[1] || "");
-                                                    let s2R = sit === 2 ? newReason : (currentVal.match(/A2:\s*([^|]*)/)?.[1] || "");
-
-                                                    const newVal = `[GRID] S1:${s1C}|A1:${s1R}|S2:${s2C}|A2:${s2R}`;
-                                                    const newMap = { ...essayAnswers, [essayStep]: newVal };
-                                                    setEssayAnswers(newMap);
-                                                    autoSaveEssay(newMap);
-                                                };
-
-                                                return (
-                                                    <tr key={sit} className="hover:bg-slate-50/30">
-                                                        <td className="p-4 align-top">
-                                                            <div className="font-black text-primary mb-2">Situasi {sit}</div>
-                                                            <p className="text-slate-700 leading-relaxed text-xs sm:text-sm font-medium">
-                                                                {sitTexts[sit - 1]}
-                                                            </p>
-                                                        </td>
-                                                        <td className="p-4 align-top">
-                                                            <div className="flex flex-col gap-3 items-center">
-                                                                <button
-                                                                    onClick={() => updateData('Proporsional', reason)}
-                                                                    className={`flex items-center gap-2 px-3 py-2 rounded-lg border-2 transition-all w-full min-w-[140px] ${isProp ? 'bg-primary border-primary text-white shadow-md' : 'border-slate-100 bg-white hover:border-primary/30 text-slate-500'}`}
-                                                                >
-                                                                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isProp ? 'border-white' : 'border-slate-300'}`}>
-                                                                        {isProp && <div className="w-2 h-2 bg-white rounded-full"></div>}
-                                                                    </div>
-                                                                    <span className="text-[10px] font-bold tracking-tight">Proporsional</span>
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => updateData('Tidak Proporsional', reason)}
-                                                                    className={`flex items-center gap-2 px-3 py-2 rounded-lg border-2 transition-all w-full min-w-[140px] ${isNonProp ? 'bg-primary border-primary text-white shadow-md' : 'border-slate-100 bg-white hover:border-primary/30 text-slate-500'}`}
-                                                                >
-                                                                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isNonProp ? 'border-white' : 'border-slate-300'}`}>
-                                                                        {isNonProp && <div className="w-2 h-2 bg-white rounded-full"></div>}
-                                                                    </div>
-                                                                    <span className="text-[10px] font-bold tracking-tight">Tidak Proporsional</span>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-4 align-top">
-                                                            <textarea
-                                                                value={reason}
-                                                                onChange={(e) => updateData(choice, e.target.value)}
-                                                                placeholder="Berikan alasan..."
-                                                                className="w-full h-32 p-3 text-sm border border-slate-200 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none resize-none transition-all font-medium bg-slate-50/50"
-                                                            />
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        ) : currentQ.id === 6 ? (
-                            <div className="space-y-6">
-                                <div className="overflow-x-auto rounded-2xl border border-slate-200">
-                                    <table className="w-full text-sm">
-                                        <thead className="bg-slate-50 border-b border-slate-200">
-                                            <tr>
-                                                <th className="p-4 text-center font-bold text-slate-600">Jumlah Cokelat (n)</th>
-                                                <th className="p-4 text-center font-bold text-slate-600">Harga (Rp)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-slate-100">
-                                            {[0, 1, 2, 3, 4].map((idx) => {
-                                                const currentVal = essayAnswers[essayStep] || "";
-                                                const parts = currentVal.replace('[TABLE]', '').trim().split('|');
-                                                const getRowData = (i: number) => {
-                                                    const r_parts = (parts[i] || "").trim().split(':');
-                                                    return { n: r_parts[0] || "", p: r_parts[1] || "" };
-                                                };
-                                                const rows = [0, 1, 2, 3, 4].map(getRowData);
-
-                                                const updateMatrix = (field: 'n' | 'p', val: string) => {
-                                                    const nextRows = [...rows];
-                                                    nextRows[idx] = { ...nextRows[idx], [field]: val };
-                                                    const tableStr = `[TABLE] ` + nextRows.map(r => `${r.n}:${r.p}`).join(' | ');
-                                                    const newMap = { ...essayAnswers, [essayStep]: tableStr };
-                                                    setEssayAnswers(newMap);
-                                                    autoSaveEssay(newMap);
-                                                };
-
-                                                const activeRow = rows[idx];
-
-                                                return (
-                                                    <tr key={idx} className="hover:bg-slate-50/30">
-                                                        <td className="p-4 w-1/3">
-                                                            <input
-                                                                type="text"
-                                                                value={activeRow.n}
-                                                                onChange={(e) => updateMatrix('n', e.target.value)}
-                                                                placeholder="..."
-                                                                className="w-full p-4 text-xl border-2 border-slate-100 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all font-black text-center text-primary bg-slate-50/50"
-                                                            />
-                                                        </td>
-                                                        <td className="p-4">
-                                                            <div className="flex items-center gap-3">
-                                                                <span className="text-slate-400 font-black text-lg">Rp</span>
-                                                                <input
-                                                                    type="text"
-                                                                    value={activeRow.p}
-                                                                    onChange={(e) => updateMatrix('p', e.target.value)}
-                                                                    placeholder="..."
-                                                                    className="w-full p-4 text-xl border-2 border-slate-100 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all font-black text-slate-800 bg-white"
-                                                                />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="p-4 bg-primary/5 rounded-2xl border border-primary/10 text-xs text-primary font-bold flex flex-col sm:flex-row justify-between items-center gap-4">
-                                    <div className="flex gap-2 items-center">
-                                        <span>Petunjuk: Isi kolom Jumlah Cokelat (n) dan kolom Harga (Rp) secara manual sesuai pemikiran Anda.</span>
-                                    </div>
-                                    <button
-                                        onClick={() => {
-                                            const newMap = { ...essayAnswers, [essayStep]: "[TABLE] :|:|:|:|:" };
-                                            setEssayAnswers(newMap);
-                                            autoSaveEssay(newMap);
-                                        }}
-                                        className="text-[10px] bg-white border border-primary/20 px-4 py-2 rounded-xl hover:bg-slate-50 transition-all font-black text-primary shadow-sm hover:shadow-md active:scale-95 whitespace-nowrap"
-                                    >
-                                        KOSONGKAN TABEL ↺
-                                    </button>
-                                </div>
-                            </div>
-                        ) : currentQ.id === 7 ? (
-                            <div className="space-y-8">
-                                <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200">
-                                    <label className="block text-sm font-bold text-slate-600 tracking-wide mb-4">Pilih bentuk visualisasi:</label>
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                        {[
-                                            { id: 'TABLE', label: 'Tabel Rasio', desc: 'Kotak baris & kolom' },
-                                            { id: 'LINE', label: 'Garis Bilangan', desc: 'Garis ganda sejajar' },
-                                            { id: 'TEXT', label: 'Deskripsi/Lainnya', desc: 'Teks atau narasi' }
-                                        ].map((opt) => {
-                                            const currentData = essayAnswers[essayStep] || "";
-                                            const isActive = currentData.includes(`[VISUAL:${opt.id}]`);
-
-                                            // Lock logic: detect if any content exists in any visualization type
-                                            const tableContent = (currentData.includes('[TABLE]') ? currentData.split('[TABLE]')[1]?.split('[REASON]')[0] : "").replace(/[:| ]/g, '');
-                                            const lineTContent = (currentData.includes('[LINE-T]') ? currentData.split('[LINE-T]')[1]?.split('[LINE-B]')[0] : "").replace(/[| ]/g, '');
-                                            const lineBContent = (currentData.includes('[LINE-B]') ? currentData.split('[LINE-B]')[1]?.split('[REASON]')[0] : "").replace(/[| ]/g, '');
-                                            const textContent = (currentData.includes('[VISUAL:TEXT]') ? currentData.split('[REASON]')[0]?.replace('[VISUAL:TEXT]', '') : "").trim();
-
-                                            const isLocked = tableContent.length > 0 || lineTContent.length > 0 || lineBContent.length > 0 || textContent.length > 0;
-                                            const isDisabled = isLocked && !isActive;
-
-                                            return (
-                                                <button
-                                                    key={opt.id}
-                                                    disabled={isDisabled}
-                                                    onClick={() => {
-                                                        if (isDisabled) return;
-                                                        const reasonPart = (currentData.split('[REASON]')[1] || "").trim();
-                                                        const newData = `[VISUAL:${opt.id}][REASON]${reasonPart}`;
-                                                        const newMap = { ...essayAnswers, [essayStep]: newData };
-                                                        setEssayAnswers(newMap);
-                                                        autoSaveEssay(newMap);
-                                                    }}
-                                                    className={`p-4 rounded-2xl border-2 text-left transition-all relative overflow-hidden group
-                                                        ${isActive ? 'border-primary bg-primary/5 shadow-md' : 'border-slate-100 bg-white hover:border-primary/30'}
-                                                        ${isDisabled ? 'opacity-40 grayscale cursor-not-allowed border-slate-50' : ''}
-                                                    `}
-                                                >
-                                                    <div className={`w-8 h-8 rounded-full border-2 mb-3 flex items-center justify-center transition-colors ${isActive ? 'bg-primary border-primary' : 'border-slate-200'}`}>
-                                                        {isActive && <CheckCircle className="w-5 h-5 text-white" />}
-                                                    </div>
-                                                    <div className={`font-bold text-sm tracking-tight ${isActive ? 'text-primary' : 'text-slate-600'}`}>{opt.label}</div>
-                                                    <div className="text-[10px] text-slate-400 font-bold mt-1">{opt.desc}</div>
-                                                    {isDisabled && (
-                                                        <div className="absolute top-2 right-2">
-                                                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
-                                                        </div>
-                                                    )}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-                                    {/* Lock Warning */}
-                                    {(essayAnswers[essayStep] || "").length > 50 && (
-                                        <div className="mt-4 flex items-center gap-2 text-[10px] text-slate-400 font-medium animate-in fade-in">
-                                            <div className="w-1 h-1 bg-primary rounded-full"></div>
-                                            Hapus data jika ingin mengubah metode visualisasi.
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Dynamic Workspace */}
-                                <div className="p-1">
-                                    {(essayAnswers[essayStep] || "").includes('[VISUAL:TABLE]') && (
-                                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4">
-                                            <div className="overflow-x-auto rounded-2xl border border-slate-200">
-                                                <table className="w-full text-sm">
-                                                    <thead className="bg-slate-50 border-b border-slate-200">
-                                                        <tr>
-                                                            <th className="p-4 text-center font-bold text-slate-600">Bahan Bakar (Liter)</th>
-                                                            <th className="p-4 text-center font-bold text-slate-600">Jarak (km)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody className="divide-y divide-slate-100">
-                                                        {[0, 1, 2, 3].map((idx) => {
-                                                            const currentVal = essayAnswers[essayStep] || "";
-                                                            const tablePart = currentVal.includes('[TABLE]') ? currentVal.split('[TABLE]')[1].split('[REASON]')[0].trim() : "";
-                                                            const parts = tablePart.split('|');
-                                                            const getRowData = (i: number) => {
-                                                                const r_parts = (parts[i] || "").trim().split(':');
-                                                                return { n: r_parts[0] || "", p: r_parts[1] || "" };
-                                                            };
-                                                            const rows = [0, 1, 2, 3].map(getRowData);
-
-                                                            const updateMatrix = (field: 'n' | 'p', val: string) => {
-                                                                const nextRows = [...rows];
-                                                                nextRows[idx] = { ...nextRows[idx], [field]: val };
-                                                                const tableStr = nextRows.map(r => `${r.n}:${r.p}`).join('|');
-                                                                const reasonPart = (currentVal.split('[REASON]')[1] || "").trim();
-                                                                const newData = `[VISUAL:TABLE][TABLE]${tableStr}[REASON]${reasonPart}`;
-                                                                const newMap = { ...essayAnswers, [essayStep]: newData };
-                                                                setEssayAnswers(newMap);
-                                                                autoSaveEssay(newMap);
-                                                            };
-                                                            const activeRow = rows[idx];
-                                                            return (
-                                                                <tr key={idx} className="hover:bg-slate-50/30">
-                                                                    <td className="p-4"><input type="text" value={activeRow.n} onChange={(e) => updateMatrix('n', e.target.value)} placeholder="..." className="w-full p-4 text-center text-xl font-black border-2 border-slate-100 rounded-2xl focus:border-primary outline-none bg-slate-50/50" /></td>
-                                                                    <td className="p-4"><input type="text" value={activeRow.p} onChange={(e) => updateMatrix('p', e.target.value)} placeholder="..." className="w-full p-4 text-center text-xl font-black border-2 border-slate-100 rounded-2xl focus:border-primary outline-none bg-white font-mono" /></td>
-                                                                </tr>
-                                                            );
-                                                        })}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {(essayAnswers[essayStep] || "").includes('[VISUAL:LINE]') && (
-                                        <div className="bg-white p-8 rounded-3xl border-2 border-slate-100 space-y-12 animate-in fade-in slide-in-from-bottom-4">
-                                            <div className="relative pt-12 pb-12">
-                                                {/* Top Line (Liter) */}
-                                                <div className="flex justify-between items-center px-4 mb-2">
-                                                    <span className="text-[10px] font-black text-primary uppercase">Bahan Bakar (Liter)</span>
-                                                </div>
-                                                <div className="h-1.5 bg-primary relative rounded-full flex justify-between items-center px-6">
-                                                    {[0, 1, 2, 3].map(i => (
-                                                        <div key={i} className="w-2 h-6 bg-primary rounded-full relative">
-                                                            <div className="absolute -top-14 left-1/2 -translate-x-1/2">
-                                                                <input
-                                                                    type="text"
-                                                                    placeholder="..."
-                                                                    className="w-14 h-12 border-2 border-slate-200 rounded-2xl text-center text-sm font-black focus:border-primary outline-none shadow-sm"
-                                                                    value={(essayAnswers[essayStep] || "").split('[LINE-T]')[1]?.split('[LINE-B]')[0]?.split('|')[i]?.trim() || ""}
-                                                                    onChange={(e) => {
-                                                                        const current = essayAnswers[essayStep] || "";
-                                                                        const tPart = current.includes('[LINE-T]') ? current.split('[LINE-T]')[1]?.split('[LINE-B]')[0]?.trim() || "|||" : "|||";
-                                                                        const bPart = current.includes('[LINE-B]') ? current.split('[LINE-B]')[1]?.split('[REASON]')[0]?.trim() || "|||" : "|||";
-                                                                        const tArr = tPart.split('|');
-                                                                        tArr[i] = e.target.value;
-                                                                        const reasonPart = (current.split('[REASON]')[1] || "").trim();
-                                                                        const newData = `[VISUAL:LINE][LINE-T]${tArr.join('|')}[LINE-B]${bPart.trim()}[REASON]${reasonPart}`;
-                                                                        setEssayAnswers({ ...essayAnswers, [essayStep]: newData });
-                                                                        autoSaveEssay({ ...essayAnswers, [essayStep]: newData });
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                {/* Bottom Line (km) */}
-                                                <div className="h-1.5 bg-slate-200 mt-24 relative rounded-full flex justify-between items-center px-6">
-                                                    {[0, 1, 2, 3].map(i => (
-                                                        <div key={i} className="w-2 h-6 bg-slate-300 rounded-full relative">
-                                                            <div className="absolute -bottom-14 left-1/2 -translate-x-1/2">
-                                                                <input
-                                                                    type="text"
-                                                                    placeholder="..."
-                                                                    className="w-14 h-12 border-2 border-slate-200 rounded-2xl text-center text-sm font-black focus:border-primary outline-none shadow-sm"
-                                                                    value={(essayAnswers[essayStep] || "").split('[LINE-B]')[1]?.split('[REASON]')[0]?.split('|')[i]?.trim() || ""}
-                                                                    onChange={(e) => {
-                                                                        const current = essayAnswers[essayStep] || "";
-                                                                        const tPart = current.includes('[LINE-T]') ? current.split('[LINE-T]')[1]?.split('[LINE-B]')[0]?.trim() || "|||" : "|||";
-                                                                        const bPart = current.includes('[LINE-B]') ? current.split('[LINE-B]')[1]?.split('[REASON]')[0]?.trim() || "|||" : "|||";
-                                                                        const bArr = bPart.split('|');
-                                                                        bArr[i] = e.target.value;
-                                                                        const reasonPart = (current.split('[REASON]')[1] || "").trim();
-                                                                        const newData = `[VISUAL:LINE][LINE-T]${tPart.trim()}[LINE-B]${bArr.join('|')}[REASON]${reasonPart}`;
-                                                                        setEssayAnswers({ ...essayAnswers, [essayStep]: newData });
-                                                                        autoSaveEssay({ ...essayAnswers, [essayStep]: newData });
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                <div className="flex justify-between items-center px-4 mt-16">
-                                                    <span className="text-[10px] font-black text-slate-400 uppercase">Jarak (km)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {(essayAnswers[essayStep] || "").includes('[VISUAL:TEXT]') && (
-                                        <textarea
-                                            ref={textareaRef}
-                                            value={(essayAnswers[essayStep] || "").split('[REASON]')[0].replace('[VISUAL:TEXT]', '').trim()}
-                                            onChange={(e) => {
-                                                const current = essayAnswers[essayStep] || "";
-                                                const reasonPart = current.split('[REASON]')[1] || "";
-                                                const newData = `[VISUAL:TEXT]${e.target.value}[REASON]${reasonPart}`;
-                                                setEssayAnswers({ ...essayAnswers, [essayStep]: newData });
-                                                autoSaveEssay({ ...essayAnswers, [essayStep]: newData });
-                                            }}
-                                            className="w-full h-64 p-6 border-2 border-slate-200 rounded-3xl outline-none focus:border-primary transition-all font-medium text-lg"
-                                            placeholder="Gunakan representasi lain (grafik, diagram, dll) atau jelaskan secara naratif di sini..."
-                                        />
-                                    )}
-                                </div>
-
-                                {currentQ.id === 7 && (
-                                    <div className="space-y-3">
-                                        <label className="block text-sm font-bold text-slate-600 tracking-wide">b. Jelaskan alasan mengapa kamu memilih bentuk visualisasi tersebut!</label>
-                                        <textarea
-                                            value={(essayAnswers[essayStep] || "").split('[REASON]')[1] || ""}
-                                            onChange={(e) => {
-                                                const current = essayAnswers[essayStep] || "";
-                                                const visualPart = current.split('[REASON]')[0] || "[VISUAL:TABLE]";
-                                                const newData = `${visualPart.trim()}[REASON]${e.target.value}`;
-                                                setEssayAnswers({ ...essayAnswers, [essayStep]: newData });
-                                                autoSaveEssay({ ...essayAnswers, [essayStep]: newData });
-                                            }}
-                                            className="w-full h-32 p-5 bg-yellow-50/30 border-2 border-yellow-100 rounded-3xl outline-none focus:border-primary transition-all font-medium"
-                                            placeholder="Berikan alasan pemilihanmu..."
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <textarea
-                                ref={textareaRef}
-                                value={val}
-                                onChange={(e) => {
-                                    const newMap = { ...essayAnswers, [essayStep]: e.target.value };
-                                    setEssayAnswers(newMap);
-                                    autoSaveEssay(newMap);
-                                }}
-                                className="w-full h-48 sm:h-64 p-5 text-lg border-2 border-slate-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none resize-none transition-all placeholder:text-slate-300 font-medium"
-                                placeholder="Tuliskan jawaban dan penjelasan lengkap Anda di sini..."
-                            />
-                        )}
+                        <textarea
+                            ref={textareaRef}
+                            value={val}
+                            onChange={(e) => {
+                                const newMap = { ...essayAnswers, [essayStep]: e.target.value };
+                                setEssayAnswers(newMap);
+                                autoSaveEssay(newMap);
+                            }}
+                            className="w-full h-48 sm:h-64 p-5 text-lg border-2 border-slate-200 rounded-2xl focus:border-primary focus:ring-4 focus:ring-primary/20 outline-none resize-none transition-all placeholder:text-slate-300 font-medium"
+                            placeholder="Tuliskan jawaban dan penjelasan lengkap Anda di sini..."
+                        />
 
                         {/* Math Keyboard Toggle */}
                         <div className="flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-100">
@@ -1014,9 +627,9 @@ function InstrumentContent() {
                     <div className="flex justify-between items-center mb-3">
                         <div>
                             <span className="font-bold text-slate-800 block text-sm sm:text-base">
-                                {step === 1 && "Tahap 1: Lingkungan Belajar"}
+                                {step === 1 && "Tahap 1: Kebiasaan Berpikir"}
                                 {step === 2 && "Tahap 2: Efikasi Diri"}
-                                {step === 3 && "Tahap 3: Penalaran Proporsional"}
+                                {step === 3 && "Tahap 3: Berpikir Kritis"}
                             </span>
                             <span className="text-xs text-slate-500 font-medium mt-1 inline-block bg-slate-50 px-2 py-1 rounded-md">
                                 {step === 1 && `${Object.keys(angket1).length} dari ${LINGKUNGAN_BELAJAR_Q.reduce((a, b) => a + b.qs.length, 0)} terjawab`}
@@ -1066,7 +679,7 @@ function InstrumentContent() {
                     </div>
                 </div>
 
-                {step === 1 && renderAngket("Skala Lingkungan Belajar", LINGKUNGAN_BELAJAR_Q, angket1, setAngket1, 1)}
+                {step === 1 && renderAngket("Skala Kebiasaan Berpikir", LINGKUNGAN_BELAJAR_Q, angket1, setAngket1, 1)}
                 {step === 2 && renderAngket("Skala Efikasi Diri", EFIKASI_DIRI_Q, angket2, setAngket2, 2)}
                 {step === 3 && renderEssay()}
             </div>

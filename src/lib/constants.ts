@@ -2,70 +2,68 @@ export type DimensionGroup = { dimensi: string; qs: string[] };
 
 export const LINGKUNGAN_BELAJAR_Q: DimensionGroup[] = [
     {
-        dimensi: "Dimensi I: Kenyamanan Fisik",
+        dimensi: "Dimensi I: Gigih",
         qs: [
-            "Ruang kelas memiliki sirkulasi udara yang sejuk.",
-            "Saya menggunakan kursi yang nyaman saat belajar matematika.",
-            "Suasana ruang kelas terasa gerah saat jam pelajaran matematika.",
-            "Bangku di kelas dalam kondisi rusak.",
-            "Lantai ruang kelas terlihat bersih.",
-            "Saya menyimpan barang bawaan dengan aman di laci meja kelas.",
-            "Sampah berserakan di sekitar meja saat belajar matematika.",
-            "Saya merasa khawatir kehilangan barang pribadi di dalam kelas."
+            "Saya tetap berusaha menyelesaikan soal meskipun sulit",
+            "Saya mencoba berbagai cara untuk menyelesaikan tugas",
+            "Saya menyelesaikan tugas sampai tuntas",
+            "Saya terus mencoba meskipun pernah gagal",
+            "Saya berhenti mengerjakan soal saat menemui kesulitan",
+            "Saya memilih meninggalkan tugas yang terasa sulit",
+            "Saya mengerjakan soal seperlunya saja",
+            "Saya cepat merasa cukup sebelum tugas selesai"
         ]
     },
     {
-        dimensi: "Dimensi II: Dukungan Sosial dan Interaksi",
+        dimensi: "Dimensi II: Mengelola Impulsivitas",
         qs: [
-            "Guru matematika memberikan bimbingan saat saya mengalami kesulitan.",
-            "Guru matematika mendengarkan pertanyaan saya dengan ramah.",
-            "Guru matematika mengabaikan saya saat saya bertanya.",
-            "Guru matematika membentak siswa yang lambat memahami materi.",
-            "Teman sekelas membantu saya memahami soal matematika yang rumit.",
-            "Saya berdiskusi dengan teman kelompok untuk memecahkan masalah matematika.",
-            "Teman sekelas mengejek jawaban saya yang keliru.",
-            "Saya mengerjakan tugas kelompok matematika sendirian."
+            "Saya berpikir sebelum menjawab pertanyaan",
+            "Saya membaca soal dengan teliti sebelum menjawab",
+            "Saya merencanakan langkah sebelum mengerjakan tugas",
+            "Saya berusaha tenang saat mengerjakan soal",
+            "Saya menjawab soal secara spontan tanpa pertimbangan",
+            "Saya terburu-buru dalam mengerjakan tugas",
+            "Saya langsung menulis jawaban tanpa membaca soal lengkap",
+            "Saya mengerjakan soal dengan tergesa-gesa"
         ]
     },
     {
-        dimensi: "Dimensi III: Iklim Akademis",
+        dimensi: "Dimensi III: Metakognitif",
         qs: [
-            "Guru matematika memberikan target penyelesaian tugas yang jelas.",
-            "Saya mendapatkan tugas matematika yang memicu rasa ingin tahu.",
-            "Guru matematika memberikan soal latihan yang membosankan.",
-            "Arahan tugas matematika dari guru membingungkan saya.",
-            "Guru matematika membebaskan saya mencari cara penyelesaian sendiri.",
-            "Saya melakukan percobaan langsung untuk memahami rumus matematika.",
-            "Guru matematika mewajibkan saya menggunakan satu cara penyelesaian baku.",
-            "Pembelajaran matematika di kelas terasa kaku."
+            "Saya memikirkan cara terbaik untuk menyelesaikan tugas",
+            "Saya mengevaluasi hasil pekerjaan saya",
+            "Saya menyadari kesalahan yang saya lakukan",
+            "Saya mengetahui strategi belajar yang cocok untuk saya",
+            "Saya mengerjakan tugas tanpa memikirkan strategi",
+            "Saya jarang mengecek kembali jawaban",
+            "Saya langsung selesai tanpa meninjau hasil pekerjaan",
+            "Saya mengerjakan soal tanpa mempertimbangkan langkah"
         ]
     },
     {
-        dimensi: "Dimensi IV: Dukungan Emosional-Psikologis",
+        dimensi: "Dimensi IV: Berpikir Fleksibel",
         qs: [
-            "Saya merasa bersemangat mengikuti pelajaran matematika di kelas.",
-            "Suasana kelas membuat saya yakin bisa menyelesaikan soal matematika.",
-            "Saya merasa cemas saat jam pelajaran matematika dimulai.",
-            "Sikap teman-teman membuat saya pesimis dalam belajar matematika.",
-            "Saya bebas menyampaikan ide penyelesaian soal di depan kelas.",
-            "Lingkungan kelas memberikan ketenangan saat saya mengerjakan ujian matematika.",
-            "Saya merasa takut saat hendak menyampaikan pendapat di kelas matematika.",
-            "Suasana kelas membuat saya tertekan saat belajar matematika."
+            "Saya menerima pendapat orang lain",
+            "Saya mencoba cara lain jika cara pertama belum berhasil",
+            "Saya mau mengubah cara berpikir jika diperlukan",
+            "Saya mempertimbangkan berbagai solusi",
+            "Saya hanya menggunakan satu cara dalam menyelesaikan soal",
+            "Saya bertahan pada cara sendiri meskipun kurang tepat",
+            "Saya mengabaikan ide dari teman",
+            "Saya menggunakan satu jawaban tanpa mempertimbangkan alternatif"
         ]
     },
     {
-        dimensi: "Dimensi V: Ketersediaan Sumber Belajar",
+        dimensi: "Dimensi V: Kreatif & Inovatif",
         qs: [
-            "Sekolah menyediakan alat peraga matematika yang memadai.",
-            "Saya meminjam buku paket matematika dari perpustakaan sekolah.",
-            "Buku paket matematika di perpustakaan sangat usang.",
-            "Alat peraga matematika di sekolah dalam kondisi rusak.",
-            "Guru matematika menampilkan video pembelajaran yang menarik.",
-            "Saya membaca modul matematika dengan bahasa yang mudah dipahami.",
-            "Saya menggunakan perangkat teknologi dari sekolah (seperti laptop atau tablet) untuk pembelajaran.",
-            "Saya memanfaatkan aplikasi pembelajaran matematika yang disediakan sekolah untuk mendalami materi yang sulit.",
-            "Sumber belajar matematika yang ada di sekolah sulit saya akses saat dibutuhkan.",
-            "Fasilitas teknologi di sekolah terabaikan dalam mendukung pembelajaran matematika saya.",
+            "Saya memiliki ide baru dalam menyelesaikan tugas",
+            "Saya suka mencoba hal baru dalam belajar",
+            "Saya menggunakan imajinasi dalam menyelesaikan masalah",
+            "Saya membuat cara sendiri dalam memahami pelajaran",
+            "Saya menggunakan cara yang sama setiap kali belajar",
+            "Saya mengikuti contoh tanpa mengembangkan ide sendiri",
+            "Saya jarang mencoba pendekatan baru",
+            "Saya menunggu contoh sebelum mulai mengerjakan",
             "Sebagai pengecekan konsentrasi membaca, mohon pilih opsi 'Tidak Setuju' (TS) untuk pernyataan ini."
         ]
     }
@@ -73,68 +71,68 @@ export const LINGKUNGAN_BELAJAR_Q: DimensionGroup[] = [
 
 export const EFIKASI_DIRI_Q: DimensionGroup[] = [
     {
-        dimensi: "Dimensi I: Magnitudo (Tingkat Kesulitan)",
+        dimensi: "Dimensi I: Magnitude",
         qs: [
-            "Saya mampu menyelesaikan soal matematika yang mudah.",
-            "Saya mampu mengerjakan soal matematika tingkat sedang meski memerlukan waktu lebih.",
-            "Saya mampu menyelesaikan soal matematika yang paling sulit setelah berpikir keras.",
-            "Saya percaya diri bahwa saya bisa memahami setiap materi matematika yang diajarkan.",
-            "Saya belum mampu mengerjakan soal-soal yang sulit.",
-            "Ketika bertemu soal yang rumit, saya langsung menyerah tanpa mencoba.",
-            "Soal matematika yang kompleks membuat saya merasa putus asa.",
-            "Saya merasa ragu dan cemas jika diminta mengerjakan soal evaluasi di depan kelas."
+            "Saya yakin mampu menyelesaikan soal matematika yang mudah.",
+            "Saya mampu mengerjakan soal dengan tingkat kesulitan sedang.",
+            "Saya percaya diri menghadapi soal yang lebih menantang.",
+            "Saya tetap berusaha menyelesaikan soal yang sulit.",
+            "Saya merasa ragu saat menghadapi soal dengan tingkat kesulitan tinggi.",
+            "Saya merasa kemampuan saya terbatas pada jenis soal tertentu.",
+            "Saya mudah kehilangan keyakinan saat soal semakin sulit.",
+            "Saya merasa kesulitan ketika tingkat soal meningkat."
         ]
     },
     {
-        dimensi: "Dimensi II: Kekuatan (Stabilitas Keyakinan)",
+        dimensi: "Dimensi II: Strength",
         qs: [
-            "Keyakinan saya terhadap kemampuan matematika tetap kuat meskipun saya pernah gagal.",
-            "Saya pantang menyerah walaupun menghadapi kesulitan dalam belajar matematika.",
-            "Saat saya mendapat nilai buruk, saya masih percaya bisa meningkatkan prestasi.",
-            "Kegagalan dalam matematika membuat saya semakin bersemangat untuk belajar.",
-            "Saya mudah putus asa ketika menghadapi soal yang belum pernah saya temui sebelumnya.",
-            "Ketika mendapat kritik dari guru, membuat saya kurang percaya diri.",
-            "Kesulitan kecil membuat saya ragu dengan kemampuan matematika saya.",
-            "Saya mudah terpengaruh oleh keraguan meskipun sebelumnya saya percaya diri."
+            "Saya yakin dengan kemampuan saya dalam belajar matematika.",
+            "Saya tetap percaya diri meskipun pernah melakukan kesalahan.",
+            "Saya yakin dapat memperbaiki kesalahan saya.",
+            "Saya memiliki keyakinan kuat saat mengerjakan soal.",
+            "Keyakinan saya mudah berubah saat mengalami kesulitan.",
+            "Saya sering merasa ragu dengan jawaban saya.",
+            "Saya mudah terpengaruh oleh pendapat teman.",
+            "Saya merasa kurang yakin dengan kemampuan saya sendiri."
         ]
     },
     {
-        dimensi: "Dimensi III: Generalitas (Keluasan Keyakinan)",
+        dimensi: "Dimensi III: Generality",
         qs: [
-            "Keyakinan saya terhadap kemampuan matematika berlaku di semua materi.",
-            "Saya percaya diri dalam menyelesaikan soal aljabar maupun geometri.",
-            "Saya percaya diri bahwa saya menguasai semua topik dalam matematika.",
-            "Saya yakin kemampuan matematika saya membantu pemahaman pada mata pelajaran IPA.",
-            "Saya merasa lebih mampu di satu materi matematika dibandingkan materi lain.",
-            "Keyakinan saya hanya berlaku pada soal-soal rutin saja.",
-            "Saya merasa belum mampu dalam matematika secara keseluruhan.",
-            "Saya merasa cemas saat harus menggunakan perhitungan matematika pada pelajaran fisika."
+            "Saya yakin mampu memahami berbagai materi matematika.",
+            "Saya percaya diri mempelajari topik matematika apa pun.",
+            "Saya mampu mengerjakan soal dari berbagai materi.",
+            "Saya yakin bisa belajar matematika dalam berbagai situasi.",
+            "Saya merasa hanya mampu pada materi tertentu saja.",
+            "Saya merasa kurang percaya diri saat menghadapi materi baru.",
+            "Saya merasa kesulitan jika bentuk soal berbeda.",
+            "Saya merasa bingung saat menghadapi variasi soal."
         ]
     },
     {
-        dimensi: "Dimensi IV: Efikasi Pemahaman Konsep Matematika",
+        dimensi: "Dimensi IV: Efikasi Pembelajaran",
         qs: [
-            "Saya percaya diri dapat memahami konsep-konsep matematika yang baru diajarkan.",
-            "Saya mampu menghubungkan konsep baru dengan pengetahuan yang sudah saya punya.",
-            "Saya percaya diri dapat menjelaskan konsep matematika kepada teman.",
-            "Saya memahami mengapa suatu rumus atau konsep matematika itu bekerja.",
-            "Saya merasa kesulitan memahami konsep-konsep abstrak dalam matematika.",
-            "Konsep-konsep baru dalam matematika membuat saya merasa bingung dan kurang percaya diri.",
-            "Saya sulit mengingat dan menggunakan rumus-rumus matematika dengan benar.",
-            "Saya merasa kesulitan jika diminta menjelaskan ulang konsep matematika dengan kata-kata saya sendiri."
+            "Saya yakin dapat memahami konsep baru dalam matematika.",
+            "Saya mampu mengikuti penjelasan guru dengan baik.",
+            "Saya yakin bisa menguasai materi yang diajarkan.",
+            "Saya mampu belajar mandiri memahami materi.",
+            "Saya merasa kesulitan memahami konsep baru.",
+            "Saya sering merasa bingung saat belajar matematika.",
+            "Saya merasa kurang memahami penjelasan guru.",
+            "Saya merasa pembelajaran matematika sulit diikuti."
         ]
     },
     {
-        dimensi: "Dimensi V: Efikasi Penalaran Proporsional",
+        dimensi: "Dimensi V: Pemecahan Masalah",
         qs: [
-            "Saya percaya diri dapat menyelesaikan soal perbandingan dan proporsi.",
-            "Saya mampu membedakan antara perbandingan senilai dan perbandingan berbalik nilai.",
-            "Saya percaya diri menggunakan strategi yang tepat dalam menyelesaikan masalah proporsi.",
-            "Saya dapat menerapkan konsep rasio dan proporsi dalam masalah kehidupan sehari-hari.",
-            "Soal tentang skala, persentase, dan kecepatan membuat saya bingung dan kurang percaya diri.",
-            "Saya mengalami kesulitan ketika harus memilih strategi yang tepat untuk masalah proporsi.",
-            "Saya sulit memahami hubungan multiplikatif dalam masalah perbandingan.",
-            "Saya sering keliru saat menerjemahkan soal cerita perbandingan ke dalam bentuk matematika.",
+            "Saya yakin dapat menyelesaikan soal secara mandiri.",
+            "Saya mampu menemukan cara penyelesaian sendiri.",
+            "Saya percaya diri saat menghadapi masalah matematika.",
+            "Saya mampu memilih strategi penyelesaian yang tepat.",
+            "Saya merasa kesulitan menemukan solusi dari soal.",
+            "Saya merasa bingung menentukan langkah penyelesaian.",
+            "Saya merasa ragu dengan strategi yang saya pilih.",
+            "Saya merasa kemampuan saya belum cukup untuk menyelesaikan soal.",
             "Sekadar untuk memastikan Anda tetap fokus, pilihlah 'Sangat Setuju' (SS) pada baris ini."
         ]
     }
@@ -147,127 +145,197 @@ export interface EssayQuestion {
     subject: string;
     cognitiveLevel: string;
     rubric: string[];
+    scoringCriteria: {
+        4: string;
+        3: string;
+        2: string;
+        1: string;
+        0: string;
+    };
 }
 
 export const ESSAY_QUESTIONS: EssayQuestion[] = [
     {
         id: 1,
-        text: "Budi membuat minuman susu cokelat dengan mencampurkan 2 sendok bubuk cokelat ke dalam 150 ml susu. Jika Budi ingin membuat porsi yang lebih besar menggunakan 300 ml susu dengan tingkat kepekatan dan rasa yang sama, jelaskan kuantitas apa saja yang berubah dan kuantitas apa yang tetap!",
-        indicator: "Memahami Kovariasi",
-        subject: "Rasio",
-        cognitiveLevel: "C2",
+        text: "Toko alat tulis 'Cerdas' sedang memberikan promo paket belajar. Paket A berisi 3 buku tulis dan 2 pulpen dengan harga Rp18.000,00. Paket B berisi 2 buku tulis dan 4 pulpen dengan harga Rp20.000,00. Toko tersebut buka setiap hari dari pukul 08.00 sampai 20.00 dan terletak di dekat pasar. Siska ingin mengetahui harga satuan buku tulis dan pulpen untuk membandingkan harga di toko lain.\n\nPertanyaan: Tentukan data yang digunakan dan tidak digunakan untuk menentukan harga satu buku tulis dan satu pulpen, lalu jelaskan alasanmu!",
+        indicator: "Mengidentifikasi data relevan & tidak relevan",
+        subject: "SPLDV",
+        cognitiveLevel: "C4",
         rubric: [
-            "Kuantitas yang berubah: Volume susu dan jumlah takaran bubuk cokelat.",
-            "Kuantitas yang tetap: Rasio atau tingkat kepekatan rasa cokelat.",
-            "Penjelasan: Karena volume susu bertambah, maka bubuk cokelat juga harus ditambah agar rasanya tetap sama."
-        ]
+            "Data yang digunakan: Paket A (3 buku tulis dan 2 pulpen = Rp18.000) dan Paket B (2 buku tulis dan 4 pulpen = Rp20.000).",
+            "Data yang tidak digunakan: Nama toko, Jam buka (08.00-20.00), Lokasi toko (dekat pasar), dan Tujuan Siska membandingkan harga.",
+            "Alasan: Data yang digunakan adalah data yang berhubungan langsung dengan jumlah barang dan harga untuk membentuk persamaan. Data lainnya tidak mempengaruhi perhitungan harga satuan."
+        ],
+        scoringCriteria: {
+            4: "Menyebutkan semua data relevan dan tidak relevan dengan tepat dan lengkap.",
+            3: "Menyebutkan sebagian besar benar, ada 1 kesalahan kecil.",
+            2: "Menyebutkan sebagian data relevan/tidak relevan tetapi kurang lengkap.",
+            1: "Jawaban tidak tepat, hanya menebak sebagian kecil.",
+            0: "Tidak menjawab atau tidak sesuai konteks."
+        }
     },
     {
         id: 2,
-        text: "Sebuah mesin penggiling dapat mengolah 10 kg biji cokelat dalam waktu 8 jam. Apabila jumlah biji cokelat yang akan digiling ditambah, jelaskan apakah waktu yang dibutuhkan mesin akan semakin lama atau semakin cepat! Berikan alasannya.",
-        indicator: "Memahami Kovariasi",
-        subject: "Rasio",
+        text: "Di kantin sekolah, Roni melihat daftar harga paket makanan yang tertulis di papan. Pada papan tersebut tertulis bahwa 3 bungkus keripik dan 5 botol jus dijual dengan harga Rp21.000,00. Saat jam istirahat, kantin terlihat cukup ramai karena banyak siswa yang sedang membeli makanan. Roni berencana membeli 2 bungkus keripik dan 2 botol jus. Ia juga membawa uang Rp20.000,00. Roni ingin mengetahui harga satuan keripik dan jus agar bisa menghitung apakah uangnya cukup.\n\nPertanyaan: Tentukan data yang digunakan dan tidak digunakan untuk membuat persamaan, lalu jelaskan alasanmu!",
+        indicator: "Mengidentifikasi data relevan & tidak relevan",
+        subject: "SPLDV",
         cognitiveLevel: "C4",
         rubric: [
-            "Waktu yang dibutuhkan akan semakin lama.",
-            "Alasan: Jumlah barang yang diproses berbanding lurus dengan waktu pengerjaan (semakin banyak barang, semakin lama waktunya)."
-        ]
+            "Data yang digunakan: 3 keripik dan 5 jus = Rp21.000.",
+            "Data yang tidak digunakan: Kantin ramai, Uang Roni Rp20.000, dan Rencana membeli 2 keripik dan 2 jus.",
+            "Alasan: Untuk membuat persamaan, hanya diperlukan hubungan jumlah barang dan total harga. Data lainnya tidak digunakan dalam penyusunan persamaan."
+        ],
+        scoringCriteria: {
+            4: "Mengidentifikasi seluruh data relevan dan menyusun model SPLDV dengan benar.",
+            3: "Data benar tetapi model sedikit kurang rapi/ada kesalahan kecil.",
+            2: "Hanya sebagian data relevan atau model belum lengkap.",
+            1: "Data dan model sebagian besar salah.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 3,
-        text: "Saat ini, umur Kakak adalah 12 tahun dan umur Adik adalah 8 tahun sehingga perbandingan umur mereka adalah 3 : 2. Apakah pada 4 tahun yang akan datang perbandingan umur mereka tetap 3 : 2? Jelaskan alasanmu!",
-        indicator: "Mengidentifikasi Hubungan Proporsional",
-        subject: "Rasio",
+        text: "Sebuah kandang berisi ayam dan kambing. Jumlah seluruh hewan adalah 20 ekor dan jumlah seluruh kaki hewan adalah 56 buah.\n\nPertanyaan: Tuliskan anggapan yang digunakan tentang jumlah kaki setiap hewan agar masalah tersebut dapat dibuat dalam bentuk persamaan!",
+        indicator: "Mengidentifikasi asumsi",
+        subject: "SPLDV",
         cognitiveLevel: "C2",
         rubric: [
-            "Tidak tetap. Empat tahun mendatang, umur Kakak menjadi 16 tahun dan Adik menjadi 12 tahun (perbandingan 4:3).",
-            "Alasan: Hubungan umur merupakan perbandingan selisih (aditif), bukan perbandingan senilai (proporsional)."
-        ]
+            "Anggapan: Ayam memiliki 2 kaki dan Kambing memiliki 4 kaki.",
+            "Penjelasan: Anggapan ini diperlukan agar jumlah kaki dapat dimodelkan dalam bentuk persamaan matematika."
+        ],
+        scoringCriteria: {
+            4: "Menyebutkan semua asumsi (2 kaki ayam, 4 kaki kambing, kondisi normal) dengan tepat.",
+            3: "Asumsi benar tetapi tidak lengkap.",
+            2: "Hanya menyebut sebagian asumsi.",
+            1: "Jawaban tidak tepat/keliru.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 4,
-        text: "Dua minggu lalu, tinggi tanaman tomat adalah 8 cm dan cabai 12 cm. Hari ini, tinggi tomat mencapai 11 cm dan cabai mencapai 15 cm. Tanaman manakah yang pertumbuhannya lebih pesat terhadap tinggi asalnya? Jelaskan alasanmu!",
-        indicator: "Mengidentifikasi Hubungan Proporsional",
-        subject: "Rasio",
-        cognitiveLevel: "C4",
+        text: "Selisih umur seorang ayah dan anak adalah 26 tahun. Lima tahun yang lalu, jumlah umur mereka adalah 40 tahun.\n\nPertanyaan: Tuliskan anggapan tentang hubungan umur sekarang dengan umur lima tahun yang lalu!",
+        indicator: "Mengidentifikasi asumsi",
+        subject: "SPLDV",
+        cognitiveLevel: "C2",
         rubric: [
-            "Tanaman Tomat.",
-            "Alasan: Berdasarkan perbandingan terhadap tinggi awal, tomat tumbuh sebesar 3/8 (37,5%), sedangkan cabai hanya tumbuh sebesar 3/12 (25%)."
-        ]
+            "Asumsi: Misal umur ayah sekarang = x (maka 5 tahun lalu = x-5) dan umur anak sekarang = y (maka 5 tahun lalu = y-5).",
+            "Penjelasan: Anggapan ini digunakan untuk menghubungkan kondisi umur sekarang dengan kondisi 5 tahun yang lalu. Karena untuk menyelesaikan SPLDV diperlukan dua variabel (seperti harga baju dan celana) sehingga perlu diketahui harga masing-masing secara terpisah."
+        ],
+        scoringCriteria: {
+            4: "Menjelaskan hubungan sekarang-masa lalu dan menyusun model SPLDV dengan benar.",
+            3: "Konsep benar tetapi penjelasan kurang lengkap.",
+            2: "Hanya memahami sebagian hubungan waktu.",
+            1: "Jawaban kurang tepat.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 5,
-        text: "Bacalah dua situasi di bawah ini dengan saksama, kelompokkanlah setiap situasi ke dalam jenis hubungan yang tepat (Proporsional atau Tidak Proporsional) dan berikan alasannya.",
-        indicator: "Mengidentifikasi Hubungan Proporsional",
-        subject: "Rasio (Bab 3 SMP)",
-        cognitiveLevel: "C3",
+        text: "Harga 2 baju dan 1 celana adalah Rp170.000,00, sedangkan harga 1 baju dan 3 celana adalah Rp185.000,00.\n\nPertanyaan: Buatlah satu pertanyaan matematika dari data di atas yang dapat diselesaikan menggunakan persamaan linear dua variabel. Jelaskan alasanmu!",
+        indicator: "Menyusun pertanyaan disertai alasan",
+        subject: "SPLDV",
+        cognitiveLevel: "C5",
         rubric: [
-            "Situasi 1: Bukan Hubungan Proporsional. Alasan: Selisih umur selalu tetap (4 tahun), tetapi rasionya berubah (14:10 menjadi 19:15). Menggunakan pemikiran aditif.",
-            "Situasi 2: Hubungan Proporsional. Alasan: Berlaku kelipatan konstan. Waktu bertambah 3x lipat, hasil cetakan juga bertambah 3x lipat (Rasio tetap 15 lembar/menit)."
-        ]
+            "Pertanyaan: Berapakah harga satu baju dan satu celana?",
+            "Alasan: Karena untuk mengetahui harga dalam jumlah tertentu, kita perlu mengetahui harga satuan terlebih dahulu agar dapat dihitung dengan tepat. (Jawaban bisa bervariasi selama relevan dan logis)"
+        ],
+        scoringCriteria: {
+            4: "Pertanyaan relevan + alasan logis dan sesuai SPLDV.",
+            3: "Pertanyaan tepat tetapi alasan kurang kuat.",
+            2: "Pertanyaan kurang tepat atau alasan lemah.",
+            1: "Hanya membuat pertanyaan tanpa alasan jelas.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 6,
-        text: "Harga 3 batang cokelat adalah Rp18.000,00. Sajikanlah informasi tersebut ke dalam sebuah tabel rasio yang menunjukkan harga untuk pembelian 1, 2, 4, dan 5 batang cokelat!",
-        indicator: "Menerapkan Representasi Proporsional",
-        subject: "Rasio",
-        cognitiveLevel: "C3",
+        text: "Harga 2 baju dan 1 celana adalah Rp170.000,00, sedangkan harga 1 baju dan 3 celana adalah Rp185.000,00.\n\nPertanyaan: Jelaskan alasan kamu mengapa kita perlu menentukan harga satuan baju dan celana terlebih dahulu sebelum menghitung total pembelian dalam jumlah yang lebih banyak!",
+        indicator: "Menyusun pertanyaan disertai alasan",
+        subject: "SPLDV",
+        cognitiveLevel: "C4",
         rubric: [
-            "Tabel Rasio: 1 cokelat = Rp6.000, 2 cokelat = Rp12.000, 4 cokelat = Rp24.000, 5 cokelat = Rp30.000",
-            "Siswa dapat menentukan harga satuan dan mengaliskan untuk kuantitas lainnya."
-        ]
+            "Alasan: Kita perlu mengetahui harga satuan baju dan celana agar dapat menghitung total harga dengan tepat. Jika tidak diketahui harga satuannya, maka sulit menentukan harga untuk jumlah barang yang berbeda."
+        ],
+        scoringCriteria: {
+            4: "Alasan jelas, logis, dan sesuai konsep SPLDV.",
+            3: "Alasan benar tetapi kurang mendalam.",
+            2: "Alasan kurang tepat atau masih umum.",
+            1: "Alasan tidak sesuai konsep.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 7,
-        text: "Sebuah mobil memerlukan 10 liter bahan bakar untuk menempuh jarak 120 km.\n\na. Tentukan jarak yang dapat ditempuh jika tersedia 5 liter, 15 liter dan 35 liter bahan bakar dengan memodelkannya menggunakan bentuk visualisasi yang menurutmu paling efektif (misalnya: tabel rasio, garis bilangan ganda, grafik, atau diagram)!\n\nb. Jelaskan alasan mengapa kamu memilih bentuk visualisasi tersebut!",
-        indicator: "Menerapkan Representasi Proporsional",
-        subject: "Rasio",
-        cognitiveLevel: "C3",
+        text: "Diketahui dua persamaan:\nx + y = 10\nx - y = 4\nSeorang siswa menyelesaikan sebagai berikut : x = 7, y = 3\n\nPertanyaan: Periksa kebenaran jawaban tersebut dengan cara mensubstitusikan kedua persamaan. Jika terdapat kesalahan, jelaskan letak kesalahannya!",
+        indicator: "Memeriksa kebenaran argumen/pernyataan/proses solusi",
+        subject: "SPLDV",
+        cognitiveLevel: "C4",
         rubric: [
-            "Visualisasi & Perhitungan: Siswa menemukan jarak 60 km (5L), 180 km (15L), dan 420 km (35L) menggunakan visual.",
-            "Garis Bilangan Ganda: Proporsi angka 5, 10, 15, 35 sejajar dengan 60, 120, 180, 420.",
-            "Tabel Rasio: Baris Liter dan Jarak dengan pola perkalian/pembagian konsisten.",
-            "Argumen Pemilihan: Alasan memilih visual (rapi, teratur, atau menunjukkan kenaikan konstan)."
-        ]
+            "Pengecekan: Substitusi ke x + y = 10 -> 7 + 3 = 10 (Benar); Substitusi ke x - y = 4 -> 7 - 3 = 4 (Benar).",
+            "Kesimpulan: Hasil benar karena memenuhi kedua persamaan tersebut. (Jika siswa di soal menjawab salah, contoh 8 dan 2, maka jelaskan letak kesalahannya pada persamaan kedua)."
+        ],
+        scoringCriteria: {
+            4: "Memeriksa seluruh langkah dan menemukan benar/salah dengan tepat.",
+            3: "Pengecekan benar tetapi tidak lengkap.",
+            2: "Hanya mengecek sebagian langkah.",
+            1: "Jawaban tidak tepat.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 8,
-        text: "Pada sebuah denah rumah, tertera skala 1 : 100. Jika panjang ruang tamu pada denah tersebut adalah 4 cm, berapakah panjang sebenarnya dari ruang tamu tersebut dalam satuan meter?",
-        indicator: "Menyelesaikan Masalah Proporsional",
-        subject: "Rasio",
-        cognitiveLevel: "C3",
+        text: "Perhatikan pernyataan berikut:\n“Jika diketahui jumlah dua bilangan adalah 20, maka kedua bilangan tersebut dapat langsung ditentukan tanpa informasi tambahan.”\n\nPertanyaan: Apakah pernyataan tersebut benar ? Jelaskan alasanmu secara matematis !",
+        indicator: "Memeriksa kebenaran argumen/pernyataan/proses solusi",
+        subject: "SPLDV",
+        cognitiveLevel: "C4",
         rubric: [
-            "Interpretasi Skala: Siswa memahami skala 1:100 berarti 1 cm mewakili 100 cm.",
-            "Perhitungan: Panjang denah 4 cm x 100 = 400 cm.",
-            "Konversi Satuan: Mengubah 400 cm menjadi 4 meter.",
-            "Jawaban Akhir: Menjawab 4 meter dengan langkah yang tepat."
-        ]
+            "Kesimpulan: Argumen tersebut tidak sepenuhnya benar.",
+            "Alasan: Dalam SPLDV diperlukan dua persamaan untuk dua variable. Informasi tentang satu jenis barang saja tidak cukup untuk menentukan harga barang lain, Diperlukan hubungan dengan barang kedua agar sistem persamaan dapat diselesaikan."
+        ],
+        scoringCriteria: {
+            4: "Menilai argumen dengan benar dan memberi alasan matematis lengkap.",
+            3: "Penilaian benar tetapi alasan kurang kuat.",
+            2: "Jawaban benar tetapi tanpa alasan jelas.",
+            1: "Jawaban tidak tepat.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 9,
-        text: "Resep minuman lemon menggunakan perbandingan 8 buah jeruk dan 2 sendok gula. Jika kamu memiliki 16 buah jeruk, berapakah jumlah gula yang diperlukan agar rasa minuman tetap sama dengan takaran aslinya?",
-        indicator: "Menyelesaikan Masalah Proporsional",
-        subject: "Rasio",
+        text: "Jumlah dua bilangan adalah 30. Salah satu bilangan dua kali dari bilangan yang lain.\n\nPertanyaan: Tentukan kedua bilangan tersebut dengan cara membuat persamaan terlebih dahulu, kemudian selesaikan. Jelaskan langkah-langkahmu.",
+        indicator: "Menyelesaikan masalah matematika disertai alasan",
+        subject: "SPLDV",
         cognitiveLevel: "C3",
         rubric: [
-            "Identifikasi Rasio Awal: Siswa mengidentifikasi perbandingan 8 jeruk : 2 gula.",
-            "Strategi Multiplikatif: Siswa menyadari jumlah jeruk meningkat 2x lipat (8 menjadi 16).",
-            "Perhitungan: Mengalikan jumlah gula dengan faktor yang sama (2 x 2 = 4).",
-            "Jawaban Akhir: Menyebutkan 4 sendok gula dengan penjelasan yang logis."
-        ]
+            "Misal: x = bilangan pertama, y = bilangan kedua. Model SPLDV: x + y = 30; x = 2y.",
+            "Substitusi: x + y = 30 -> 2y + y = 30 -> 3y = 30 -> y = 10. Maka x = 20.",
+            "Jawaban: bilangan pertama = 20, bilangan kedua = 10."
+        ],
+        scoringCriteria: {
+            4: "Model SPLDV benar + langkah lengkap + jawaban tepat.",
+            3: "Langkah benar tetapi ada kesalahan kecil.",
+            2: "Model benar tetapi penyelesaian kurang lengkap.",
+            1: "Banyak kesalahan konsep.",
+            0: "Tidak menjawab."
+        }
     },
     {
         id: 10,
-        text: "Gelas A berisi 180 ml susu dan 6 sendok bubuk cokelat. Gelas B berisi 200 ml susu dan 10 sendok bubuk cokelat. Tentukan gelas manakah yang memiliki rasa cokelat paling pekat dengan membandingkan laju satuan susunya!",
-        indicator: "Menyelesaikan Masalah Proporsional",
-        subject: "Rasio",
-        cognitiveLevel: "C4",
+        text: "Di sebuah tempat parkir terdapat motor dan mobil. Dari hasil perhitungan diperoleh bahwa jumlah motor adalah 30 dan jumlah mobil adalah 20. Total kendaraan di tempat parkir tersebut adalah 50.\n\nPertanyaan: Apakah hasil tersebut sudah sesuai dengan persamaan, jelaskan mengapa jawabanmu benar!",
+        indicator: "Menyelesaikan masalah matematika disertai alasan",
+        subject: "SPLDV",
+        cognitiveLevel: "C3",
         rubric: [
-            "Laju Satuan Gelas A: Siswa membagi 180 / 6 = 30 ml per sendok.",
-            "Laju Satuan Gelas B: Siswa membagi 200 / 10 = 20 ml per sendok.",
-            "Komparasi Kepekatan: Siswa menyimpulkan Gelas B lebih pekat karena rasio susu per sendok cokelatnya lebih kecil (lebih sedikit susu untuk jumlah cokelat yang sama).",
-            "Jawaban Akhir: Gelas B dengan penjelasan perhitungan laju satuan yang benar."
-        ]
+            "Pengecekan: Jumlah motor + mobil = 30 + 20 = 50 (Sesuai total kendaraan).",
+            "Penjelasan: Jika substitusi ke model SPLDV menghasilkan pendapatan yang sesuai, maka hasil tersebut konsisten dengan semua data dalam soal, Artinya solusi SPLDV memenuhi kedua persamaan sekaligus."
+        ],
+        scoringCriteria: {
+            4: "Menjelaskan konsistensi hasil dengan data secara logis dan lengkap.",
+            3: "Penjelasan benar tetapi kurang mendalam.",
+            2: "Penjelasan masih umum/kurang tepat.",
+            1: "Tidak mampu menghubungkan hasil dengan data.",
+            0: "Tidak menjawab."
+        }
     }
 ];
 

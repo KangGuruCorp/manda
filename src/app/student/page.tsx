@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ClipboardList, BookOpen, BrainCircuit, CheckCircle, ArrowRight, LogOut } from "lucide-react";
-import { ESSAY_QUESTIONS } from "@/lib/constants";
+import { ESSAY_QUESTIONS, LINGKUNGAN_BELAJAR_Q, EFIKASI_DIRI_Q } from "@/lib/constants";
 import { db } from "@/lib/firebase";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 
@@ -86,7 +86,7 @@ export default function StudentDashboard() {
             return ESSAY_QUESTIONS.every((_, i) => checkAnswered(i, ans[i] || ""));
         })();
 
-        if (angket1Ans === 43 && angket2Ans === 41 && isEssayDone && (studentData as any).status_progres !== 4) {
+        if (angket1Ans === totalAngket1 && angket2Ans === totalAngket2 && isEssayDone && (studentData as any).status_progres !== 4) {
             const docRef = doc(db, "students", sId);
             updateDoc(docRef, { status_progres: 4 }).catch(console.error);
         }
@@ -98,13 +98,15 @@ export default function StudentDashboard() {
         router.push("/");
     };
 
+    const totalAngket1 = LINGKUNGAN_BELAJAR_Q.reduce((acc, curr) => acc + curr.qs.length, 0);
     const angket1Ans = studentData.angkets_1 ? Object.keys(studentData.angkets_1).length : 0;
-    const angket1Progress = (angket1Ans / 43) * 100;
-    const isAngket1Done = angket1Ans === 43;
+    const angket1Progress = (angket1Ans / totalAngket1) * 100;
+    const isAngket1Done = angket1Ans === totalAngket1;
 
+    const totalAngket2 = EFIKASI_DIRI_Q.reduce((acc, curr) => acc + curr.qs.length, 0);
     const angket2Ans = studentData.angkets_2 ? Object.keys(studentData.angkets_2).length : 0;
-    const angket2Progress = (angket2Ans / 41) * 100;
-    const isAngket2Done = angket2Ans === 41;
+    const angket2Progress = (angket2Ans / totalAngket2) * 100;
+    const isAngket2Done = angket2Ans === totalAngket2;
 
     const isEssayDone = (() => {
         const ans = studentData.essay_answer;
@@ -161,7 +163,7 @@ export default function StudentDashboard() {
                                 </h1>
                                 <p className="text-slate-500 font-medium">Portal Instrumen Penelitian</p>
                                 <p className="text-[10px] md:text-xs text-slate-400 font-medium leading-relaxed mt-1 italic">
-                                    (Pengaruh Lingkungan Belajar dan Efikasi Diri terhadap Kemampuan Penalaran Proporsional Matematika)
+                                    (Pengaruh Kebiasaan Berpikir dan Efikasi Diri Terhadap Kemampuan Berpikir Kritis Matematika)
                                 </p>
                             </div>
                             <div className="flex items-center gap-3">
@@ -220,12 +222,12 @@ export default function StudentDashboard() {
                                 <ClipboardList className="w-6 h-6" />
                             </div>
                             <div className="text-left flex-1">
-                                <h3 className="font-bold text-slate-800 text-lg">1. Skala Lingkungan Belajar</h3>
+                                <h3 className="font-bold text-slate-800 text-lg">1. Skala Kebiasaan Berpikir</h3>
                                 <p className="text-slate-500 text-sm">Berisi pertanyaan skala sikap 1-5.</p>
                                 <div className="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
                                     <div className={`h-full ${isAngket1Done ? 'bg-green-500' : 'bg-primary'} transition-all duration-500`} style={{ width: `${angket1Progress}%` }}></div>
                                 </div>
-                                <p className="text-xs text-slate-400 mt-1 font-medium">{angket1Ans} / 43 terjawab</p>
+                                <p className="text-xs text-slate-400 mt-1 font-medium">{angket1Ans} / {totalAngket1} terjawab</p>
                             </div>
                         </div>
                         {isAngket1Done ? (
@@ -251,7 +253,7 @@ export default function StudentDashboard() {
                                 <div className="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
                                     <div className={`h-full ${isAngket2Done ? 'bg-green-500' : 'bg-amber-500'} transition-all duration-500`} style={{ width: `${angket2Progress}%` }}></div>
                                 </div>
-                                <p className="text-xs text-slate-400 mt-1 font-medium">{angket2Ans} / 41 terjawab</p>
+                                <p className="text-xs text-slate-400 mt-1 font-medium">{angket2Ans} / {totalAngket2} terjawab</p>
                             </div>
                         </div>
                         {isAngket2Done ? (
@@ -272,7 +274,7 @@ export default function StudentDashboard() {
                                 <BrainCircuit className="w-6 h-6" />
                             </div>
                             <div className="text-left flex-1">
-                                <h3 className="font-bold text-slate-800 text-lg">3. Tes Penalaran Proporsional</h3>
+                                <h3 className="font-bold text-slate-800 text-lg">3. Tes Berpikir Kritis</h3>
                                 <p className="text-slate-500 text-sm">Soal uraian essay matematika.</p>
                                 <div className="w-full bg-slate-100 h-2 rounded-full mt-3 overflow-hidden">
                                     <div className={`h-full ${isEssayDone ? 'bg-green-500' : 'bg-purple-500'} transition-all duration-500`} style={{ width: `${essayProgress}%` }}></div>
