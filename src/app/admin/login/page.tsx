@@ -21,7 +21,7 @@ export default function AdminLogin() {
         setError("");
 
         try {
-            if (password !== "guruganteng") {
+            if (password !== "11223344") {
                 setError("Password rahasia salah.");
                 setLoading(false);
                 return;
