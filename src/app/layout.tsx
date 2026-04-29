@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Portal Instrumen Penelitian",
   description: "Instrumen Penelitian Berpikir Kritis SPLDV",
   icons: {
-    icon: "https://upload.wikimedia.org/wikipedia/id/8/8f/Logo_Universitas_Indraprasta_PGRI_%28UNINDRA%29.png",
+    icon: "https://i.ibb.co.com/TDWVXb15/unindra.png",
   }
 };
 
