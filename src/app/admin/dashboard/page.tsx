@@ -583,11 +583,18 @@ export default function AdminDashboard() {
         const wsRecap = XLSX.utils.aoa_to_sheet([recapHeaders, ...recapRows]);
 
         // 2. Angket Kebiasaan Berpikir (Item breakdown)
+        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
         const envHeaders = ["Nama Lengkap", "Nama Sekolah", ...Array.from({ length: 41 }).map((_, i) => `Butir ${i + 1}`)];
         const envRows = students.map(s => [
             s.name,
             s.school || "-",
-            ...Array.from({ length: 41 }).map((_, i) => s.angkets_1?.[i] ?? "")
+            ...Array.from({ length: 41 }).map((_, i) => {
+                let val = s.angkets_1?.[i];
+                if (val !== undefined && negativeIndices.includes(i)) {
+                    val = 6 - val;
+                }
+                return val ?? "";
+            })
         ]);
         const wsEnv = XLSX.utils.aoa_to_sheet([envHeaders, ...envRows]);
 
@@ -596,7 +603,13 @@ export default function AdminDashboard() {
         const efiRows = students.map(s => [
             s.name,
             s.school || "-",
-            ...Array.from({ length: 41 }).map((_, i) => s.angkets_2?.[i] ?? "")
+            ...Array.from({ length: 41 }).map((_, i) => {
+                let val = s.angkets_2?.[i];
+                if (val !== undefined && negativeIndices.includes(i)) {
+                    val = 6 - val;
+                }
+                return val ?? "";
+            })
         ]);
         const wsEfi = XLSX.utils.aoa_to_sheet([efiHeaders, ...efiRows]);
 
@@ -642,7 +655,14 @@ export default function AdminDashboard() {
                 </div>
                 <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                     {flatQuestions.map((q, i) => {
-                        const ans = angkets?.[i];
+                        const rawAns = angkets?.[i];
+                        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
+                        let ans = rawAns;
+                        
+                        if (rawAns !== undefined && negativeIndices.includes(i)) {
+                            ans = 6 - rawAns;
+                        }
+
                         let bgClass = "bg-slate-200 text-slate-500";
                         if (ans) {
                             if (isEfikasi) {
@@ -1254,17 +1274,28 @@ export default function AdminDashboard() {
                                                 <tr key={s.id} className="hover:bg-slate-50 transition-colors">
                                                     <td className="p-4 font-medium text-slate-800 sticky left-0 bg-white z-10 shadow-[1px_0_0_0_#f1f5f9] whitespace-nowrap">{s.name}</td>
                                                     <td className="p-4 text-center font-bold text-slate-600 border-r border-slate-100 bg-white">{calculateScore(angkets) || "-"}</td>
-                                                    {Array.from({ length: len }).map((_, i) => (
-                                                        <td key={i} className="p-1">
-                                                            <div
-                                                                onClick={(e) => { e.stopPropagation(); setPopover({ text: qsList[i], x: e.clientX, y: e.clientY, idx: i }); }}
-                                                                className={`w-8 h-8 mx-auto flex items-center justify-center rounded text-[11px] cursor-pointer ring-offset-1 hover:ring-2 hover:ring-slate-300 transition-all ${popover?.idx === i ? 'ring-2 ring-primary scale-125 z-10' : ''} ${getCellColor(angkets?.[i])}`}
-                                                                title="Klik untuk melihat teks pernyataan"
-                                                            >
-                                                                {angkets?.[i] || "-"}
-                                                            </div>
-                                                        </td>
-                                                    ))}
+                                                    {Array.from({ length: len }).map((_, i) => {
+                                                        const rawVal = angkets?.[i];
+                                                        const negativeIndices = [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39];
+                                                        let displayVal = rawVal;
+                                                        
+                                                        // Reverse display value for negative items (except trap index 40)
+                                                        if (rawVal !== undefined && negativeIndices.includes(i)) {
+                                                            displayVal = 6 - rawVal;
+                                                        }
+
+                                                        return (
+                                                            <td key={i} className="p-1">
+                                                                <div
+                                                                    onClick={(e) => { e.stopPropagation(); setPopover({ text: qsList[i], x: e.clientX, y: e.clientY, idx: i }); }}
+                                                                    className={`w-8 h-8 mx-auto flex items-center justify-center rounded text-[11px] cursor-pointer ring-offset-1 hover:ring-2 hover:ring-slate-300 transition-all ${popover?.idx === i ? 'ring-2 ring-primary scale-125 z-10' : ''} ${getCellColor(displayVal)}`}
+                                                                    title="Klik untuk melihat teks pernyataan"
+                                                                >
+                                                                    {displayVal || "-"}
+                                                                </div>
+                                                            </td>
+                                                        );
+                                                    })}
                                                 </tr>
                                             );
                                         }
