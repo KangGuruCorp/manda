@@ -1176,7 +1176,17 @@ export default function AdminDashboard() {
                                         />
                                         <Sparkles className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-indigo-400" />
                                     </div>
-                                    <p className="text-[10px] text-slate-400 font-medium italic">Kunci ini disimpan secara lokal di browser Anda dan hanya digunakan untuk proses penilaian.</p>
+                                    <div className="flex justify-between items-center px-1">
+                                        <p className="text-[10px] text-slate-400 font-medium italic">Kunci ini disimpan secara lokal di browser Anda.</p>
+                                        <a 
+                                            href="https://aistudio.google.com/app/apikey" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 transition-colors"
+                                        >
+                                            <Wand2 className="w-3 h-3" /> Dapatkan API Key di Google AI Studio
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div className="space-y-2">
