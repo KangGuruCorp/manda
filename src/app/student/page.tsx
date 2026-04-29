@@ -205,7 +205,7 @@ export default function StudentDashboard() {
                         <li>Anda dapat memilih tahap mana saja terlebih dahulu, namun disarankan berurutan.</li>
                         <li>Pastikan koneksi lancar, jawaban Anda akan otomatis tersimpan.</li>
                         <li>Jawablah skala sesuai keadaan diri Anda masing-masing sejujurnya.</li>
-                        <li>Pada tes penalaran, tuliskan langkah penyelesaian secara detail!</li>
+                        <li>Pada soal tes, tuliskan langkah penyelesaian secara detail!</li>
                     </ul>
                 </div>
 
