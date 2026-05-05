@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 export default function StudentLogin() {
   const [name, setName] = useState("");
   const [school, setSchool] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -16,6 +17,7 @@ export default function StudentLogin() {
     e.preventDefault();
     const cleanName = name.trim().toUpperCase();
     const cleanSchool = school.trim().toUpperCase();
+    const cleanPhone = phone.trim();
     if (!cleanName || !cleanSchool) return;
 
     setLoading(true);
@@ -36,6 +38,12 @@ export default function StudentLogin() {
           const docSnap = querySnapshot.docs[0];
           studentId = docSnap.id;
           existingData = docSnap.data();
+          
+          // Update phone if provided and not already set
+          if (cleanPhone && !existingData.phone) {
+            existingData.phone = cleanPhone;
+            await setDoc(doc(db, "students", studentId), { phone: cleanPhone }, { merge: true });
+          }
         }
       }
 
@@ -50,12 +58,16 @@ export default function StudentLogin() {
         if (localStudent) {
           studentId = (localStudent as any).id;
           existingData = localStudent;
+          if (cleanPhone && !existingData.phone) {
+            existingData.phone = cleanPhone;
+          }
         } else {
           studentId = "std-" + Date.now();
           existingData = {
             id: studentId,
             name: cleanName,
             school: cleanSchool,
+            phone: cleanPhone,
             createdAt: new Date().toISOString(),
             status_progres: 0
           };
@@ -111,8 +123,9 @@ export default function StudentLogin() {
 
         <form onSubmit={handleLogin} className="p-8 pb-6">
           <div className="mb-6">
-            <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
-              Masukan Nama Lengkap
+            <label htmlFor="name" className="block text-sm font-bold text-foreground mb-2 flex justify-between">
+              <span>Masukan Nama Lengkap <span className="text-rose-500">*</span></span>
+              <span className="text-[10px] text-rose-400 font-bold uppercase tracking-wider">Wajib Diisi</span>
             </label>
             <input
               id="name"
@@ -127,8 +140,9 @@ export default function StudentLogin() {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="school" className="block text-sm font-semibold text-foreground mb-2">
-              Nama Sekolah
+            <label htmlFor="school" className="block text-sm font-bold text-foreground mb-2 flex justify-between">
+              <span>Nama Sekolah <span className="text-rose-500">*</span></span>
+              <span className="text-[10px] text-rose-400 font-bold uppercase tracking-wider">Wajib Diisi</span>
             </label>
             <input
               id="school"
@@ -138,6 +152,21 @@ export default function StudentLogin() {
               placeholder="Contoh: SMP Negeri 1 Jakarta"
               className="w-full text-lg px-4 py-4 rounded-xl border-2 border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all outline-none"
               required
+              disabled={loading}
+            />
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
+              Nomor WhatsApp (Opsional)
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Contoh: 081234567890"
+              className="w-full text-lg px-4 py-4 rounded-xl border-2 border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all outline-none"
               disabled={loading}
             />
           </div>
